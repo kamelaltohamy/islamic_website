@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية - الشيخ محمد إسماعيل المقدم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Alpine.js for Interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Alexandria', 'sans-serif'], serif: ['Amiri', 'serif'] },
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a', 950: '#172554' },
+                        accent: { 50: '#fefce8', 100: '#fef08a', 200: '#fde047', 500: '#eab308', 600: '#ca8a04', 700: '#b45309', 800: '#92400e' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f8fafc; }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; right: 23px;
+            width: 2px;
+            background-color: #e2e8f0;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 pb-24" x-data="{ mobileMenuOpen: false, searchOpen: false }">
+
+    <!-- Top Bar -->
+    <div class="bg-primary-950 text-slate-200 py-1.5 text-xs sm:text-sm border-b border-accent-700/30">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <span class="text-accent-500"><i class="fa-regular fa-calendar-alt ml-1"></i> الإثنين، ١٢ محرم ١٤٤٨ هـ</span>
+            </div>
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <span class="border-r border-primary-800 h-4 mx-2"></span>
+                <a href="#" class="hover:text-accent-500 transition-colors font-medium">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <button @click="mobileMenuOpen = true" class="lg:hidden text-slate-600 hover:text-primary-700 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-800 border border-primary-200 group-hover:border-accent-600 group-hover:text-accent-700 transition-colors">
+                            <i class="fa-solid fa-book-quran text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-primary-900 leading-tight group-hover:text-primary-700 transition-colors">موقع الشيخ</h1>
+                            <p class="text-xs text-accent-700 font-semibold hidden sm:block tracking-wider">محمد إسماعيل المقدم</p>
+                        </div>
+                    </a>
+                </div>
+                <nav class="hidden lg:flex items-center gap-8 font-semibold text-slate-600">
+                    <a href="#" class="hover:text-primary-700 transition-colors">الرئيسية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">الصوتيات والمرئيات</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">التفريغات</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">المقالات والكتب</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">الفتاوى</a>
+                </nav>
+                <div class="relative hidden md:block w-64">
+                    <input type="text" placeholder="ابحث في الموقع..." class="w-full bg-slate-50 text-sm rounded-full py-2 px-4 pl-10 border border-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+                    <i class="fa-solid fa-search absolute left-3 top-2.5 text-slate-400"></i>
+                </div>
+                <button @click="searchOpen = !searchOpen" class="md:hidden text-slate-600 text-xl hover:text-primary-700 transition">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div x-show="searchOpen" x-collapse class="md:hidden mt-4">
+                 <div class="relative">
+                    <input type="text" placeholder="ابحث في الموقع..." class="w-full bg-slate-50 rounded-xl py-3 px-4 pl-10 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-primary-500">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Drawer -->
+    <div x-show="mobileMenuOpen" style="display: none;" class="fixed inset-0 z-50 lg:hidden">
+        <div class="absolute inset-0 bg-slate-900/80" @click="mobileMenuOpen = false" x-transition.opacity></div>
+        <div class="absolute top-0 right-0 bottom-0 w-72 bg-white shadow-2xl flex flex-col" x-transition.transform.duration.300ms>
+            <div class="p-4 flex justify-between items-center border-b border-slate-100 bg-primary-50">
+                <span class="font-bold text-primary-900">القائمة الرئيسية</span>
+                <button @click="mobileMenuOpen = false" class="text-slate-500 hover:text-accent-700 text-xl"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <nav class="p-4 flex-1 overflow-y-auto flex flex-col space-y-2 font-medium">
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-home w-6 text-center text-accent-700"></i> الرئيسية</a>
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-microphone w-6 text-center text-accent-700"></i> الصوتيات والمرئيات</a>
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-file-lines w-6 text-center text-accent-700"></i> التفريغات</a>
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-book w-6 text-center text-accent-700"></i> المقالات والكتب</a>
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-scale-balanced w-6 text-center text-accent-700"></i> الفتاوى</a>
+                <a href="#" class="py-3 px-4 bg-primary-50 text-primary-800 rounded-xl"><i class="fa-solid fa-user-tie w-6 text-center text-accent-700"></i> السيرة الذاتية</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Breadcrumbs -->
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="text-xs text-slate-400 font-medium mb-4 flex items-center gap-2">
+            <a href="#" class="hover:text-primary-700 transition-colors"><i class="fa-solid fa-home"></i> الرئيسية</a>
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+            <span class="text-primary-900 font-bold">السيرة الذاتية</span>
+        </div>
+    </div>
+
+        <main class="container mx-auto px-4 py-12 max-w-4xl">
+        
+        <!-- Bio Hero / Profile -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 md:p-12 mb-10 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-primary-900 to-primary-800"></div>
+            <div class="absolute top-0 left-0 w-full h-32 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+            
+            <div class="relative z-10">
+                <div class="w-32 h-32 mx-auto rounded-full bg-white p-2 shadow-lg mb-6 mt-4">
+                    <!-- Placeholder for Sheikh's Photo or abstract icon -->
+                    <div class="w-full h-full rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-primary-200 text-5xl">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold text-primary-900 mb-2">الشيخ د. محمد إسماعيل المقدم</h1>
+                <p class="text-accent-700 font-bold text-sm mb-6">داعية إسلامي، وطبيب، ومؤسس المدرسة السلفية بالإسكندرية</p>
+                <div class="flex justify-center gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-50 text-slate-500 hover:bg-primary-50 hover:text-primary-700 flex items-center justify-center transition border border-slate-200"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-50 text-slate-500 hover:bg-primary-50 hover:text-primary-700 flex items-center justify-center transition border border-slate-200"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bio Details (Timeline Style) -->
+        <div class="relative timeline-line">
+            
+            <!-- Section 1 -->
+            <div class="relative z-10 pl-4 pr-16 mb-12">
+                <div class="absolute right-2 top-0 w-12 h-12 bg-white rounded-full border-4 border-primary-100 flex items-center justify-center text-accent-600 text-xl shadow-sm">
+                    <i class="fa-solid fa-baby"></i>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <h3 class="text-xl font-bold text-primary-900 mb-3">المولد والنشأة</h3>
+                    <p class="font-serif text-slate-700 leading-loose">ولد الشيخ محمد إسماعيل المقدم في مدينة الإسكندرية بجمهورية مصر العربية. نشأ في أسرة محبة للعلم والدين، وتلقى تعليمه الأساسي في مدارس الإسكندرية، وظهرت عليه علامات النبوغ وحب المطالعة منذ صغره، حيث ارتبط بالمساجد وبدأ في طلب العلم الشرعي مبكراً بالتوازي مع دراسته الأكاديمية.</p>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="relative z-10 pl-4 pr-16 mb-12">
+                <div class="absolute right-2 top-0 w-12 h-12 bg-white rounded-full border-4 border-primary-100 flex items-center justify-center text-accent-600 text-xl shadow-sm">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <h3 class="text-xl font-bold text-primary-900 mb-3">الدراسة الأكاديمية</h3>
+                    <ul class="list-disc list-inside space-y-2 font-serif text-slate-700 leading-loose">
+                        <li>التحق بكلية الطب البشري بجامعة الإسكندرية وتخرج منها.</li>
+                        <li>حصل على دبلوم في الطب النفسي، وعمل طبيباً لفترة.</li>
+                        <li>بالرغم من تفوقه الطبي، غلب عليه حبه للعلم الشرعي والدعوة إلى الله فتفرغ لهما لاحقاً.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="relative z-10 pl-4 pr-16 mb-12">
+                <div class="absolute right-2 top-0 w-12 h-12 bg-white rounded-full border-4 border-primary-100 flex items-center justify-center text-accent-600 text-xl shadow-sm">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <h3 class="text-xl font-bold text-primary-900 mb-3">طلب العلم والمشايخ</h3>
+                    <p class="font-serif text-slate-700 leading-loose mb-4">تلقى العلم عن كوكبة من العلماء الكبار في مصر والعالم الإسلامي، واعتنى بشكل خاص بعلوم الحديث والعقيدة وتزكية النفوس. من أبرز العلماء الذين استفاد منهم واعتنى بتراثهم:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-primary-50 text-primary-800 border border-primary-100 px-3 py-1 rounded-lg text-sm font-bold">الشيخ الألباني</span>
+                        <span class="bg-primary-50 text-primary-800 border border-primary-100 px-3 py-1 rounded-lg text-sm font-bold">الشيخ ابن باز</span>
+                        <span class="bg-primary-50 text-primary-800 border border-primary-100 px-3 py-1 rounded-lg text-sm font-bold">علماء الإسكندرية</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="relative z-10 pl-4 pr-16">
+                <div class="absolute right-2 top-0 w-12 h-12 bg-white rounded-full border-4 border-primary-100 flex items-center justify-center text-accent-600 text-xl shadow-sm">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <h3 class="text-xl font-bold text-primary-900 mb-3">المؤلفات والإنتاج العلمي</h3>
+                    <p class="font-serif text-slate-700 leading-loose mb-4">أثرى الشيخ المكتبة الإسلامية بالعشرات من المؤلفات التي تميزت بالعمق والتحقيق العلمي، والجمع بين الأصالة والمعاصرة. من أشهر كتبه:</p>
+                    <ul class="space-y-3 mt-4">
+                        <li class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100 hover:border-accent-300 transition-colors">
+                            <i class="fa-solid fa-book text-accent-600"></i> <strong class="text-sm">علو الهمة</strong> <span class="text-xs text-slate-500">(مجلد كبير)</span>
+                        </li>
+                        <li class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100 hover:border-accent-300 transition-colors">
+                            <i class="fa-solid fa-book text-accent-600"></i> <strong class="text-sm">عودة الحجاب</strong> <span class="text-xs text-slate-500">(3 أجزاء)</span>
+                        </li>
+                        <li class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100 hover:border-accent-300 transition-colors">
+                            <i class="fa-solid fa-book text-accent-600"></i> <strong class="text-sm">فقه أشراط الساعة</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

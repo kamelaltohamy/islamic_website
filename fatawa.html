@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفتاوى الشرعية - موقع الشيخ محمد إسماعيل المقدم</title>
+    
+    <!-- Google Fonts: Alexandria (UI/Headings) & Amiri (Content/Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Alpine.js for Interactivity (Including Collapse plugin for smooth accordion) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Alexandria', 'sans-serif'], 
+                        serif: ['Amiri', 'serif'],         
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8', 
+                            800: '#1e40af',
+                            900: '#1e3a8a', // Deep Sapphire
+                            950: '#172554',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef08a',
+                            200: '#fde047',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#b45309', // Islamic Gold
+                            800: '#92400e',
+                        },
+                        surface: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f8fafc;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .fatwa-content blockquote {
+            border-right: 4px solid #b45309;
+            background-color: #fefce8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 pb-24" x-data="{ mobileMenuOpen: false, searchOpen: false }">
+
+    <!-- Top Bar -->
+    <div class="bg-primary-950 text-slate-200 py-1.5 text-xs sm:text-sm border-b border-accent-700/30">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <span class="text-accent-500"><i class="fa-regular fa-calendar-alt ml-1"></i> الإثنين، ١٢ محرم ١٤٤٨ هـ</span>
+            </div>
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <span class="border-r border-primary-800 h-4 mx-2"></span>
+                <a href="#" class="hover:text-accent-500 transition-colors font-medium">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo & Branding -->
+                <div class="flex items-center gap-4">
+                    <button @click="mobileMenuOpen = true" class="lg:hidden text-slate-600 hover:text-primary-700 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-800 border border-primary-200 group-hover:border-accent-600 group-hover:text-accent-700 transition-colors">
+                            <i class="fa-solid fa-book-quran text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-primary-900 leading-tight group-hover:text-primary-700 transition-colors">موقع الشيخ</h1>
+                            <p class="text-xs text-accent-700 font-semibold hidden sm:block tracking-wider">محمد إسماعيل المقدم</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-8 font-semibold text-slate-600">
+                    <a href="#" class="hover:text-primary-700 transition-colors">الرئيسية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">المكتبة الصوتية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">التفريغات</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">المقالات والكتب</a>
+                    <a href="#" class="text-primary-800 border-b-2 border-accent-700 pb-1 transition-colors">الفتاوى</a>
+                </nav>
+
+                <!-- Search -->
+                <div class="relative hidden md:block w-64">
+                    <input type="text" placeholder="ابحث في الموقع..." class="w-full bg-slate-50 text-sm rounded-full py-2 px-4 pl-10 border border-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+                    <i class="fa-solid fa-search absolute left-3 top-2.5 text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Drawer -->
+    <div x-show="mobileMenuOpen" style="display: none;" class="fixed inset-0 z-50 lg:hidden">
+        <div class="absolute inset-0 bg-slate-900/80" @click="mobileMenuOpen = false" x-transition.opacity></div>
+        <div class="absolute top-0 right-0 bottom-0 w-72 bg-white shadow-2xl flex flex-col" x-transition.transform.duration.300ms>
+            <div class="p-4 flex justify-between items-center border-b border-slate-100 bg-primary-50">
+                <span class="font-bold text-primary-900">القائمة الرئيسية</span>
+                <button @click="mobileMenuOpen = false" class="text-slate-500 hover:text-accent-700 text-xl"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <nav class="p-4 flex-1 overflow-y-auto flex flex-col space-y-2 font-medium">
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-home w-6 text-center text-accent-700"></i> الرئيسية</a>
+                <a href="#" class="py-3 px-4 bg-primary-50 text-primary-800 rounded-xl"><i class="fa-solid fa-scale-balanced w-6 text-center text-accent-700"></i> الفتاوى</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+        
+        <!-- Breadcrumbs -->
+        <div class="text-xs text-slate-400 font-medium mb-6 flex items-center gap-2">
+            <a href="#" class="hover:text-primary-700 transition-colors"><i class="fa-solid fa-home"></i> الرئيسية</a>
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+            <span class="text-primary-900 font-bold">الفتاوى الشرعية</span>
+        </div>
+
+        <!-- Page Hero & Search Section -->
+        <div class="bg-gradient-to-br from-primary-900 to-slate-900 rounded-3xl p-8 md:p-12 mb-8 relative overflow-hidden shadow-sm border-t-4 border-accent-600 text-center">
+            <!-- Pattern Overlay -->
+            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+            
+            <div class="relative z-10 max-w-3xl mx-auto">
+                <div class="w-20 h-20 mx-auto rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-accent-500 text-4xl shadow-inner mb-6">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">قسم الفتاوى الشرعية</h2>
+                <p class="text-primary-200 font-serif leading-relaxed mb-8">محرك بحث شامل يضم آلاف الفتاوى الشرعية والأجوبة العلمية المؤصلة على أسئلة المستفتين في مختلف أبواب الفقه والعقيدة.</p>
+                
+                <!-- Main Fatwa Search -->
+                <div class="relative w-full max-w-2xl mx-auto group">
+                    <input type="text" placeholder="اكتب سؤالك أو كلمة مفتاحية للبحث في الفتاوى..." class="w-full bg-white/10 text-white placeholder-white/60 text-base md:text-lg rounded-2xl py-4 px-6 pr-14 border border-white/30 focus:outline-none focus:border-accent-500 focus:bg-white/20 transition-all backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.2)]">
+                    <button class="absolute right-4 top-4 text-accent-400 group-focus-within:text-accent-500 transition-colors">
+                        <i class="fa-solid fa-search text-xl"></i>
+                    </button>
+                    <!-- Search Tags -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-[11px] font-bold text-primary-200">
+                        <span>شائع الآن:</span>
+                        <a href="#" class="bg-white/10 hover:bg-accent-600 hover:text-white px-3 py-1 rounded-full transition-colors border border-white/10">زكاة الفطر</a>
+                        <a href="#" class="bg-white/10 hover:bg-accent-600 hover:text-white px-3 py-1 rounded-full transition-colors border border-white/10">الصلاة للمسافر</a>
+                        <a href="#" class="bg-white/10 hover:bg-accent-600 hover:text-white px-3 py-1 rounded-full transition-colors border border-white/10">البيع والشراء عبر الإنترنت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8" x-data="{ activeCategory: 'all' }">
+            
+            <!-- MAIN CONTENT AREA (Fatawa List) -->
+            <div class="w-full lg:w-3/4 flex flex-col gap-6 order-2 lg:order-1">
+                
+                <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                    <h3 class="text-xl font-bold text-primary-900 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-accent-600"></i> أحدث الفتاوى
+                    </h3>
+                    <div class="flex items-center gap-2 text-sm bg-slate-50 p-1 rounded-xl border border-slate-200">
+                        <button class="px-4 py-1.5 rounded-lg bg-white shadow-sm text-primary-900 font-bold">الأحدث</button>
+                        <button class="px-4 py-1.5 rounded-lg text-slate-500 hover:text-primary-700 transition-colors">الأكثر قراءة</button>
+                    </div>
+                </div>
+
+                <!-- Accordion Fatawa List using Alpine.js x-data state -->
+                <div class="space-y-4" x-data="{ activeFatwa: 1 }">
+                    
+                    <!-- Fatwa Item 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300" :class="activeFatwa === 1 ? 'ring-2 ring-primary-500/20 shadow-md' : 'hover:border-primary-300'">
+                        <!-- Question Header -->
+                        <button @click="activeFatwa = activeFatwa === 1 ? null : 1" class="w-full flex items-start sm:items-center justify-between p-5 md:p-6 text-right focus:outline-none">
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 flex-shrink-0 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center font-bold text-lg border border-primary-100">
+                                    <i class="fa-solid fa-question text-sm"></i>
+                                </div>
+                                <div class="mt-1 sm:mt-0">
+                                    <h4 class="font-bold text-primary-900 text-sm md:text-base leading-snug pr-2" :class="activeFatwa === 1 ? 'text-accent-700' : ''">ما هو حكم المسح على الجوارب المعاصرة، وما هي شروطه؟</h4>
+                                    <div class="flex items-center gap-3 mt-2 text-[11px] text-slate-400 font-serif pr-2">
+                                        <span class="bg-slate-100 px-2 py-0.5 rounded font-sans font-bold text-slate-500">فقه العبادات / الطهارة</span>
+                                        <span>رقم الفتوى: 1450</span>
+                                        <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ٥ محرم ١٤٤٥</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300 mt-2 sm:mt-0" :class="activeFatwa === 1 ? 'rotate-180 text-accent-600' : ''"></i>
+                        </button>
+                        
+                        <!-- Answer Body (Collapsible) -->
+                        <div x-show="activeFatwa === 1" x-collapse class="border-t border-slate-100 bg-slate-50">
+                            <div class="p-6 md:p-8 fatwa-content font-serif text-slate-700 leading-loose text-sm md:text-base">
+                                <p class="font-bold text-primary-800 mb-4 font-sans text-sm"><i class="fa-solid fa-check-circle text-accent-600 ml-1"></i> الإجابة:</p>
+                                <p class="mb-4">الحمد لله، والصلاة والسلام على رسول الله، أما بعد:</p>
+                                <p class="mb-4">يجوز المسح على الجوارب (الشرابات) التي يلبسها الناس اليوم إذا توفرت فيها الشروط المعتبرة شرعاً، وهو مذهب طائفة من الصحابة والتابعين، واختاره شيخ الإسلام ابن تيمية رحمه الله. والشروط هي:</p>
+                                <ul class="list-disc list-inside space-y-2 mb-4 pr-4">
+                                    <li>أن يلبسهما على طهارة كاملة (بعد وضوء غسل فيه الرجلين).</li>
+                                    <li>أن يكون الجورب طاهراً في نفسه.</li>
+                                    <li>أن يكون المسح في الحدث الأصغر لا في الجنابة.</li>
+                                    <li>أن يكون في المدة المحددة شرعاً (يوم وليلة للمقيم، وثلاثة أيام بلياليها للمسافر).</li>
+                                </ul>
+                                <blockquote>
+                                    "يُمسح على الجوربين إذا كانا صفيقين (سميكين) لا يشفان، ويمكّنان من المشي فيهما"
+                                </blockquote>
+                                <p>والله تعالى أعلم.</p>
+                                
+                                <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+                                    <button class="text-xs font-bold text-slate-500 hover:text-primary-700 transition-colors flex items-center gap-1"><i class="fa-solid fa-link"></i> نسخ رابط الفتوى</button>
+                                    <a href="#" class="bg-white border border-slate-200 hover:bg-primary-50 text-primary-700 text-xs font-bold px-4 py-2 rounded-lg transition-colors">قراءة الفتوى كاملة</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fatwa Item 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300" :class="activeFatwa === 2 ? 'ring-2 ring-primary-500/20 shadow-md' : 'hover:border-primary-300'">
+                        <button @click="activeFatwa = activeFatwa === 2 ? null : 2" class="w-full flex items-start sm:items-center justify-between p-5 md:p-6 text-right focus:outline-none">
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 flex-shrink-0 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center font-bold text-lg border border-primary-100">
+                                    <i class="fa-solid fa-question text-sm"></i>
+                                </div>
+                                <div class="mt-1 sm:mt-0">
+                                    <h4 class="font-bold text-primary-900 text-sm md:text-base leading-snug pr-2" :class="activeFatwa === 2 ? 'text-accent-700' : ''">ما حكم العمل في شركات التسويق الهرمي أو الشبكي؟</h4>
+                                    <div class="flex items-center gap-3 mt-2 text-[11px] text-slate-400 font-serif pr-2">
+                                        <span class="bg-slate-100 px-2 py-0.5 rounded font-sans font-bold text-slate-500">فقه المعاملات / البيوع</span>
+                                        <span>رقم الفتوى: 1448</span>
+                                        <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ١٥ ذو الحجة ١٤٤٤</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300 mt-2 sm:mt-0" :class="activeFatwa === 2 ? 'rotate-180 text-accent-600' : ''"></i>
+                        </button>
+                        
+                        <div x-show="activeFatwa === 2" x-collapse class="border-t border-slate-100 bg-slate-50">
+                            <div class="p-6 md:p-8 fatwa-content font-serif text-slate-700 leading-loose text-sm md:text-base">
+                                <p class="font-bold text-primary-800 mb-4 font-sans text-sm"><i class="fa-solid fa-check-circle text-accent-600 ml-1"></i> الإجابة:</p>
+                                <p class="mb-4">الحمد لله والصلاة والسلام على رسول الله، أما بعد:</p>
+                                <p class="mb-4">صدرت قرارات من المجامع الفقهية واللجان الشرعية بتحريم التعامل بأسلوب التسويق الشبكي أو الهرمي؛ وذلك لما يشتمل عليه من محاذير شرعية عديدة، منها:</p>
+                                <ul class="list-disc list-inside space-y-2 mb-4 pr-4">
+                                    <li>تضمنه للغرر المحرم، حيث لا يدري المشترك هل ينجح في جذب العدد المطلوب لنيل العمولة أم لا.</li>
+                                    <li>أكل أموال الناس بالباطل؛ لأن المستفيد الأكبر هو الشركة، والنسبة الغالبة من المشتركين يخسرون.</li>
+                                    <li>أن السلعة فيه غالباً غير مقصودة لذاتها، وإنما القصد هو العمولات.</li>
+                                </ul>
+                                <p>لذا الواجب على المسلم الحذر من هذه المعاملات والبحث عن الكسب الطيب الحلال. والله أعلم.</p>
+                                
+                                <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+                                    <button class="text-xs font-bold text-slate-500 hover:text-primary-700 transition-colors flex items-center gap-1"><i class="fa-solid fa-link"></i> نسخ رابط الفتوى</button>
+                                    <a href="#" class="bg-white border border-slate-200 hover:bg-primary-50 text-primary-700 text-xs font-bold px-4 py-2 rounded-lg transition-colors">قراءة الفتوى كاملة</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fatwa Item 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300" :class="activeFatwa === 3 ? 'ring-2 ring-primary-500/20 shadow-md' : 'hover:border-primary-300'">
+                        <button @click="activeFatwa = activeFatwa === 3 ? null : 3" class="w-full flex items-start sm:items-center justify-between p-5 md:p-6 text-right focus:outline-none">
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 flex-shrink-0 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center font-bold text-lg border border-primary-100">
+                                    <i class="fa-solid fa-question text-sm"></i>
+                                </div>
+                                <div class="mt-1 sm:mt-0">
+                                    <h4 class="font-bold text-primary-900 text-sm md:text-base leading-snug pr-2" :class="activeFatwa === 3 ? 'text-accent-700' : ''">حكم قراءة الفاتحة للمأموم في الصلاة الجهرية خلف الإمام</h4>
+                                    <div class="flex items-center gap-3 mt-2 text-[11px] text-slate-400 font-serif pr-2">
+                                        <span class="bg-slate-100 px-2 py-0.5 rounded font-sans font-bold text-slate-500">فقه العبادات / الصلاة</span>
+                                        <span>رقم الفتوى: 1390</span>
+                                        <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ١٠ شوال ١٤٤٤</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300 mt-2 sm:mt-0" :class="activeFatwa === 3 ? 'rotate-180 text-accent-600' : ''"></i>
+                        </button>
+                        
+                        <div x-show="activeFatwa === 3" x-collapse class="border-t border-slate-100 bg-slate-50">
+                            <div class="p-6 md:p-8 fatwa-content font-serif text-slate-700 leading-loose text-sm md:text-base">
+                                <p class="font-bold text-primary-800 mb-4 font-sans text-sm"><i class="fa-solid fa-check-circle text-accent-600 ml-1"></i> الإجابة:</p>
+                                <p class="mb-4">هذه المسألة من المسائل التي اختلف فيها أهل العلم قديماً وحديثاً على أقوال، والراجح من أقوال أهل العلم أن قراءة الإمام قراءة للمأموم في الصلاة الجهرية، لقوله تعالى: ﴿وَإِذَا قُرِئَ الْقُرْآنُ فَاسْتَمِعُوا لَهُ وَأَنصِتُوا لَعَلَّكُمْ تُرْحَمُونَ﴾، ولقول النبي ﷺ: «إنما جعل الإمام ليؤتم به، فإذا كبر فكبروا، وإذا قرأ فأنصتوا».</p>
+                                <p>وعليه فلا يجب على المأموم قراءة الفاتحة إذا جهر الإمام، بل ينصت ويستمع. أما في الصلاة السرية كالظهر والعصر فيقرأ المأموم الفاتحة في نفسه. والله أعلم.</p>
+                                <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+                                    <button class="text-xs font-bold text-slate-500 hover:text-primary-700 transition-colors flex items-center gap-1"><i class="fa-solid fa-link"></i> نسخ رابط الفتوى</button>
+                                    <a href="#" class="bg-white border border-slate-200 hover:bg-primary-50 text-primary-700 text-xs font-bold px-4 py-2 rounded-lg transition-colors">قراءة التفصيل والأدلة</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More -->
+                <div class="flex justify-center mt-6">
+                    <button class="bg-white text-primary-800 border-2 border-primary-200 hover:bg-primary-50 hover:border-primary-300 font-bold px-8 py-3 rounded-xl transition-all flex items-center gap-2 shadow-sm">
+                        عرض المزيد من الفتاوى <i class="fa-solid fa-chevron-down text-sm"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- SIDEBAR (Left visually) -->
+            <aside class="w-full lg:w-1/4 flex flex-col gap-6 order-1 lg:order-2">
+                
+                <!-- CTA: Ask a Question -->
+                <div class="bg-gradient-to-b from-accent-600 to-accent-700 rounded-3xl p-6 text-center shadow-lg border-2 border-accent-500 relative overflow-hidden text-white">
+                    <div class="absolute -right-6 -top-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-accent-600 shadow-inner border-4 border-accent-400/50">
+                            <i class="fa-solid fa-comment-dots text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">هل لديك سؤال شرعي؟</h3>
+                        <p class="text-xs text-accent-100 font-serif mb-6 leading-relaxed">أرسل سؤالك عبر النموذج المخصص وسيقوم الشيخ بالإجابة عليه في أقرب وقت متاح بإذن الله.</p>
+                        <a href="#" class="block w-full bg-white text-accent-700 hover:bg-primary-50 hover:text-primary-800 font-bold py-3 rounded-xl transition-colors text-sm shadow-md">
+                            طرح سؤال جديد
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Categories List -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mt-2">
+                    <div class="bg-primary-50 px-5 py-4 border-b border-primary-100">
+                        <h3 class="font-bold text-primary-900 flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-folder-tree text-accent-600"></i> أبواب الفتاوى
+                        </h3>
+                    </div>
+                    <ul class="p-2 space-y-1">
+                        <li>
+                            <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary-700 transition-colors text-sm font-bold group">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-slate-300 group-hover:text-accent-500 transition-colors"></i> فقه العبادات</span>
+                                <span class="bg-primary-50 text-primary-600 border border-primary-100 text-[10px] px-2 py-0.5 rounded-lg">1,245</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary-700 transition-colors text-sm font-bold group">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-slate-300 group-hover:text-accent-500 transition-colors"></i> فقه المعاملات</span>
+                                <span class="bg-primary-50 text-primary-600 border border-primary-100 text-[10px] px-2 py-0.5 rounded-lg">850</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary-700 transition-colors text-sm font-bold group">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-slate-300 group-hover:text-accent-500 transition-colors"></i> فقه الأسرة</span>
+                                <span class="bg-primary-50 text-primary-600 border border-primary-100 text-[10px] px-2 py-0.5 rounded-lg">620</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary-700 transition-colors text-sm font-bold group">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-slate-300 group-hover:text-accent-500 transition-colors"></i> العقيدة والتوحيد</span>
+                                <span class="bg-primary-50 text-primary-600 border border-primary-100 text-[10px] px-2 py-0.5 rounded-lg">930</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-primary-700 transition-colors text-sm font-bold group">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-slate-300 group-hover:text-accent-500 transition-colors"></i> السيرة النبوية والتاريخ</span>
+                                <span class="bg-primary-50 text-primary-600 border border-primary-100 text-[10px] px-2 py-0.5 rounded-lg">340</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Info Box -->
+                <div class="bg-slate-50 rounded-2xl shadow-sm border border-slate-200 p-5 text-center">
+                    <i class="fa-solid fa-circle-info text-2xl text-slate-400 mb-2"></i>
+                    <h4 class="font-bold text-slate-700 text-sm mb-2">تنبيه هام</h4>
+                    <p class="text-xs text-slate-500 font-serif leading-relaxed">جميع الفتاوى المنشورة هنا هي من تفريغ دروس ولقاءات الشيخ، أو إجاباته المباشرة على أسئلة الموقع. ولا تُغني عن سؤال أهل العلم المباشر في النوازل والقضايا الشائكة.</p>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 border-t-4 border-primary-600 pt-12 pb-6 mt-12 font-serif">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center gap-3 mb-4 text-white">
+                    <i class="fa-solid fa-book-quran text-2xl text-accent-500"></i>
+                    <h2 class="text-xl font-bold font-sans">موقع الشيخ محمد إسماعيل</h2>
+                </div>
+                <p class="text-sm leading-relaxed text-slate-400">موقع دعوي علمي يهدف إلى نشر العلم النافع المستمد من كتاب الله وسنة رسوله بفهم سلف الأمة.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4 font-sans">روابط سريعة</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-accent-400 transition flex items-center gap-2"><i class="fa-solid fa-angle-left text-xs"></i> من هو الشيخ؟</a></li>
+                    <li><a href="#" class="hover:text-accent-400 transition flex items-center gap-2"><i class="fa-solid fa-angle-left text-xs"></i> السلاسل العلمية</a></li>
+                    <li><a href="#" class="hover:text-accent-400 transition flex items-center gap-2"><i class="fa-solid fa-angle-left text-xs"></i> تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4 font-sans">تواصل معنا</h3>
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-slate-800 pt-6 text-center text-sm font-sans container mx-auto px-4">
+            <p>جميع الحقوق محفوظة © 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التفريغات النصية - موقع الشيخ محمد إسماعيل المقدم</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Alexandria', 'sans-serif'], serif: ['Amiri', 'serif'] },
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a', 950: '#172554' },
+                        accent: { 50: '#fefce8', 100: '#fef08a', 200: '#fde047', 500: '#eab308', 600: '#ca8a04', 700: '#b45309', 800: '#92400e' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f1f5f9; -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="font-sans text-slate-800 pb-24" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Header / Nav (Simplified for preview) -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-800 border border-primary-200">
+                    <i class="fa-solid fa-book-quran text-2xl"></i>
+                </div>
+                <div><h1 class="text-xl md:text-2xl font-bold text-primary-900 leading-tight">موقع الشيخ</h1></div>
+            </a>
+            <nav class="hidden lg:flex items-center gap-8 font-semibold text-slate-600">
+                <a href="#" class="hover:text-primary-700 transition">الرئيسية</a>
+                <a href="#" class="hover:text-primary-700 transition">الصوتيات</a>
+                <a href="#" class="text-primary-800 border-b-2 border-accent-700 pb-1">التفريغات</a>
+                <a href="#" class="hover:text-primary-700 transition">المقالات والكتب</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+        
+        <!-- Breadcrumbs -->
+        <div class="text-xs text-slate-400 font-medium mb-6 flex items-center gap-2">
+            <a href="#" class="hover:text-primary-700 transition-colors"><i class="fa-solid fa-home"></i> الرئيسية</a>
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+            <span class="text-primary-900 font-bold">التفريغات النصية</span>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-br from-primary-900 to-primary-950 rounded-3xl p-8 mb-8 relative overflow-hidden shadow-sm border-t-4 border-accent-600">
+            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+            <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-center gap-5">
+                    <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-accent-500 text-3xl shadow-inner">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">التفريغات النصية</h2>
+                        <p class="text-sm text-primary-200 font-serif leading-relaxed max-w-xl">نصوص المحاضرات والسلاسل العلمية مفرغة ومراجعة من قبل طلبة العلم، لتيسير القراءة والبحث والنسخ والاقتباس.</p>
+                    </div>
+                </div>
+                <div class="w-full md:w-auto relative">
+                    <input type="text" placeholder="ابحث في نصوص التفريغات..." class="w-full md:w-72 bg-white/10 text-white placeholder-white/50 text-sm rounded-xl py-3 px-4 pl-10 border border-white/20 focus:outline-none focus:border-accent-500 focus:bg-white/20 transition-all">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-accent-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Main List -->
+            <div class="w-full lg:w-3/4 flex flex-col gap-4 order-2 lg:order-1">
+                
+                <!-- Toolbar -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-3 flex justify-between items-center">
+                    <div class="flex items-center gap-2 overflow-x-auto text-sm font-bold">
+                        <button class="bg-primary-900 text-white px-4 py-2 rounded-lg shadow-sm whitespace-nowrap">أحدث التفريغات</button>
+                        <button class="text-slate-500 hover:bg-slate-50 hover:text-primary-700 px-4 py-2 rounded-lg transition whitespace-nowrap">السلاسل المفرغة كاملة</button>
+                    </div>
+                </div>
+
+                <!-- Transcript Item 1 -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-primary-300 hover:shadow-md transition-all group">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-primary-50 rounded-xl text-primary-700 flex items-center justify-center text-xl border border-primary-100 flex-shrink-0 group-hover:bg-primary-700 group-hover:text-white transition">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-slate-400 font-bold mb-1 flex items-center gap-1"><i class="fa-solid fa-folder-tree text-accent-600"></i> سلسلة شرح صحيح البخاري</div>
+                            <h3 class="font-bold text-slate-800 text-base group-hover:text-primary-700 transition leading-snug">تفريغ: المقدمة وفضل علم الحديث - كتاب بدء الوحي</h3>
+                            <div class="flex items-center gap-4 mt-2 text-xs text-slate-500 font-serif">
+                                <span><i class="fa-solid fa-file-word text-blue-500 ml-1"></i> 12 صفحة</span>
+                                <span><i class="fa-regular fa-calendar text-primary-400 ml-1"></i> ١٥ محرم ١٤٤٥</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto border-t sm:border-t-0 border-slate-100 pt-3 sm:pt-0 mt-2 sm:mt-0">
+                        <button class="flex-1 sm:flex-none text-slate-500 hover:text-red-500 bg-slate-50 hover:bg-red-50 w-10 h-10 rounded-lg flex items-center justify-center transition border border-slate-100" title="تحميل PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                        <button class="flex-1 sm:flex-none text-slate-500 hover:text-blue-600 bg-slate-50 hover:bg-blue-50 w-10 h-10 rounded-lg flex items-center justify-center transition border border-slate-100" title="تحميل Word"><i class="fa-solid fa-file-word"></i></button>
+                        <a href="#" class="flex-1 sm:flex-none bg-primary-50 text-primary-800 hover:bg-primary-800 hover:text-white border border-primary-200 font-bold px-5 py-2 rounded-lg transition text-sm text-center">قراءة التفريغ</a>
+                    </div>
+                </div>
+
+                <!-- Transcript Item 2 -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-primary-300 hover:shadow-md transition-all group">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-primary-50 rounded-xl text-primary-700 flex items-center justify-center text-xl border border-primary-100 flex-shrink-0 group-hover:bg-primary-700 group-hover:text-white transition">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-slate-400 font-bold mb-1 flex items-center gap-1"><i class="fa-solid fa-folder-tree text-accent-600"></i> مقاطع وخطب منفردة</div>
+                            <h3 class="font-bold text-slate-800 text-base group-hover:text-primary-700 transition leading-snug">تفريغ خطبة: الاستعداد لشهر رمضان المبارك</h3>
+                            <div class="flex items-center gap-4 mt-2 text-xs text-slate-500 font-serif">
+                                <span><i class="fa-solid fa-file-word text-blue-500 ml-1"></i> 8 صفحات</span>
+                                <span><i class="fa-regular fa-calendar text-primary-400 ml-1"></i> ٢٨ شعبان ١٤٤٤</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto border-t sm:border-t-0 border-slate-100 pt-3 sm:pt-0 mt-2 sm:mt-0">
+                        <button class="flex-1 sm:flex-none text-slate-500 hover:text-red-500 bg-slate-50 hover:bg-red-50 w-10 h-10 rounded-lg flex items-center justify-center transition border border-slate-100" title="تحميل PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                        <button class="flex-1 sm:flex-none text-slate-500 hover:text-blue-600 bg-slate-50 hover:bg-blue-50 w-10 h-10 rounded-lg flex items-center justify-center transition border border-slate-100" title="تحميل Word"><i class="fa-solid fa-file-word"></i></button>
+                        <a href="#" class="flex-1 sm:flex-none bg-primary-50 text-primary-800 hover:bg-primary-800 hover:text-white border border-primary-200 font-bold px-5 py-2 rounded-lg transition text-sm text-center">قراءة التفريغ</a>
+                    </div>
+                </div>
+
+                <!-- Load More -->
+                <button class="w-full mt-2 py-3 rounded-xl border-2 border-dashed border-slate-200 text-slate-500 font-bold text-sm hover:border-primary-300 hover:text-primary-700 hover:bg-white transition-all">تحميل المزيد...</button>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="w-full lg:w-1/4 flex flex-col gap-6 order-1 lg:order-2">
+                
+                <!-- Volunteer CTA (Very common in Islamic sites) -->
+                <div class="bg-gradient-to-br from-accent-600 to-accent-700 rounded-2xl p-6 text-center text-white shadow-lg relative overflow-hidden border border-accent-500">
+                    <div class="absolute -right-6 -top-6 w-20 h-20 bg-white/20 rounded-full blur-xl"></div>
+                    <i class="fa-solid fa-pen-fancy text-4xl mb-3 text-white/90"></i>
+                    <h3 class="font-bold text-lg mb-2">تطوع في التفريغ</h3>
+                    <p class="text-xs text-accent-100 font-serif mb-4 leading-relaxed">ساهم معنا في تفريغ المحاضرات ونشر العلم النافع، وكن شريكاً في الأجر بإذن الله.</p>
+                    <a href="#" class="block w-full bg-white text-accent-700 hover:bg-primary-50 font-bold py-2.5 rounded-xl transition shadow-md text-sm">انضم لفريق التفريغ</a>
+                </div>
+
+                <!-- Category Links -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="bg-primary-50 px-5 py-4 border-b border-primary-100">
+                        <h3 class="font-bold text-primary-900 text-sm"><i class="fa-solid fa-folder-open text-accent-600 ml-2"></i> تصنيفات التفريغات</h3>
+                    </div>
+                    <ul class="p-2 space-y-1">
+                        <li><a href="#" class="flex justify-between items-center p-3 hover:bg-slate-50 rounded-xl text-sm font-bold text-slate-700 transition"><span>العقيدة والتوحيد</span><span class="bg-slate-100 text-xs px-2 py-0.5 rounded text-slate-500">120</span></a></li>
+                        <li><a href="#" class="flex justify-between items-center p-3 hover:bg-slate-50 rounded-xl text-sm font-bold text-slate-700 transition"><span>الفقه وأصوله</span><span class="bg-slate-100 text-xs px-2 py-0.5 rounded text-slate-500">85</span></a></li>
+                        <li><a href="#" class="flex justify-between items-center p-3 hover:bg-slate-50 rounded-xl text-sm font-bold text-slate-700 transition"><span>السيرة والتاريخ</span><span class="bg-slate-100 text-xs px-2 py-0.5 rounded text-slate-500">45</span></a></li>
+                        <li><a href="#" class="flex justify-between items-center p-3 hover:bg-slate-50 rounded-xl text-sm font-bold text-slate-700 transition"><span>الرقائق والآداب</span><span class="bg-slate-100 text-xs px-2 py-0.5 rounded text-slate-500">210</span></a></li>
+                    </ul>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-primary-900 text-slate-300 border-t-2 border-accent-700 pt-12 pb-6 mt-12 font-serif relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 relative z-10">
+            <div>
+                <div class="flex items-center gap-3 mb-4 text-white">
+                    <i class="fa-solid fa-book-quran text-2xl text-accent-200"></i>
+                    <h2 class="text-lg font-bold font-sans">موقع الشيخ محمد إسماعيل</h2>
+                </div>
+                <p class="text-xs leading-relaxed text-slate-300">موقع دعوي علمي يهدف إلى نشر العلم النافع المستمد من كتاب الله وسنة رسوله بفهم سلف الأمة، ويضم تراث الشيخ محمد إسماعيل المقدم من صوتيات ومرئيات وكتب ومقالات.</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-white mb-4 font-sans tracking-wider border-b border-white/5 pb-2">روابط سريعة</h3>
+                <ul class="space-y-2.5 text-xs">
+                    <li><a href="#" class="hover:text-accent-200 transition duration-300 flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-accent-700"></i> من هو الشيخ؟</a></li>
+                    <li><a href="#" class="hover:text-accent-200 transition duration-300 flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-accent-700"></i> السلاسل العلمية المكتملة</a></li>
+                    <li><a href="#" class="hover:text-accent-200 transition duration-300 flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-accent-700"></i> الفتاوى الشرعية</a></li>
+                    <li><a href="#" class="hover:text-accent-200 transition duration-300 flex items-center gap-2"><i class="fa-solid fa-angle-left text-[10px] text-accent-700"></i> تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-white mb-4 font-sans tracking-wider border-b border-white/5 pb-2">تواصل معنا</h3>
+                <p class="text-xs mb-4 text-slate-300">تابع الحسابات الرسمية ليصلك كل جديد</p>
+                <div class="flex gap-2.5">
+                    <a href="#" class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent-700 hover:text-white transition-all"><i class="fa-brands fa-youtube text-sm"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent-700 hover:text-white transition-all"><i class="fa-brands fa-telegram text-sm"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent-700 hover:text-white transition-all"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent-700 hover:text-white transition-all"><i class="fa-brands fa-twitter text-sm"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/5 pt-6 text-xs font-sans flex flex-col sm:flex-row justify-between items-center container mx-auto px-4 gap-4 relative z-10">
+            <p class="text-slate-400">جميع الحقوق محفوظة © موقع الشيخ محمد إسماعيل المقدم 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المكتبة المرئية - موقع الشيخ محمد إسماعيل المقدم</title>
+    
+    <!-- Google Fonts: Alexandria (UI/Headings) & Amiri (Content/Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Alpine.js for Interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration (Royal Blue & Islamic Gold Theme) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Alexandria', 'sans-serif'], 
+                        serif: ['Amiri', 'serif'],         
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8', // Royal Blue
+                            800: '#1e40af',
+                            900: '#1e3a8a', // Deep Sapphire
+                            950: '#172554',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef08a',
+                            200: '#fde047',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#b45309', // Islamic Gold
+                            800: '#92400e',
+                        },
+                        surface: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f1f5f9;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 pb-24" x-data="videosPageData()" :class="{'overflow-hidden': videoModal.isOpen}">
+
+    <!-- Top Bar -->
+    <div class="bg-primary-950 text-slate-200 py-1.5 text-xs sm:text-sm border-b border-accent-700/30">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <span class="text-accent-500"><i class="fa-regular fa-calendar-alt ml-1"></i> الإثنين، ١٢ محرم ١٤٤٨ هـ</span>
+            </div>
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <span class="border-r border-primary-800 h-4 mx-2"></span>
+                <a href="#" class="hover:text-accent-500 transition-colors font-medium">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo & Branding -->
+                <div class="flex items-center gap-4">
+                    <button @click="mobileMenuOpen = true" class="lg:hidden text-slate-600 hover:text-primary-700 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-800 border border-primary-200 group-hover:border-accent-600 group-hover:text-accent-700 transition-colors">
+                            <i class="fa-solid fa-book-quran text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-primary-900 leading-tight group-hover:text-primary-700 transition-colors">موقع الشيخ</h1>
+                            <p class="text-xs text-accent-700 font-semibold hidden sm:block tracking-wider">محمد إسماعيل المقدم</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-8 font-semibold text-slate-600">
+                    <a href="#" class="hover:text-primary-700 transition-colors">الرئيسية</a>
+                    <a href="#" class="text-primary-800 border-b-2 border-accent-700 pb-1 transition-colors">المكتبة المرئية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">المكتبة الصوتية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">التفريغات</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">المقالات والكتب</a>
+                </nav>
+
+                <!-- Search -->
+                <div class="relative hidden md:block w-64">
+                    <input type="text" placeholder="ابحث في المرئيات..." class="w-full bg-slate-50 text-sm rounded-full py-2 px-4 pl-10 border border-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+                    <i class="fa-solid fa-search absolute left-3 top-2.5 text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Drawer -->
+    <div x-show="mobileMenuOpen" style="display: none;" class="fixed inset-0 z-50 lg:hidden">
+        <div class="absolute inset-0 bg-slate-900/80" @click="mobileMenuOpen = false" x-transition.opacity></div>
+        <div class="absolute top-0 right-0 bottom-0 w-72 bg-white shadow-2xl flex flex-col" x-transition.transform.duration.300ms>
+            <div class="p-4 flex justify-between items-center border-b border-slate-100 bg-primary-50">
+                <span class="font-bold text-primary-900">القائمة الرئيسية</span>
+                <button @click="mobileMenuOpen = false" class="text-slate-500 hover:text-accent-700 text-xl"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <nav class="p-4 flex-1 overflow-y-auto flex flex-col space-y-2 font-medium">
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-home w-6 text-center text-accent-700"></i> الرئيسية</a>
+                <a href="#" class="py-3 px-4 bg-primary-50 text-primary-800 rounded-xl"><i class="fa-solid fa-video w-6 text-center text-accent-700"></i> المكتبة المرئية</a>
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-microphone w-6 text-center text-accent-700"></i> المكتبة الصوتية</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+        
+        <!-- Breadcrumbs -->
+        <div class="text-xs text-slate-400 font-medium mb-6 flex items-center gap-2">
+            <a href="#" class="hover:text-primary-700 transition-colors"><i class="fa-solid fa-home"></i> الرئيسية</a>
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+            <span class="text-primary-900 font-bold">المكتبة المرئية</span>
+        </div>
+
+        <!-- Page Hero Section -->
+        <div class="bg-gradient-to-br from-slate-900 to-primary-950 rounded-3xl p-8 mb-8 relative overflow-hidden shadow-sm border-t-4 border-accent-600">
+            <!-- Cinematic Geometric Pattern Overlay -->
+            <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSIjZWFiMzA4Ii8+Cjwvc3ZnPg==')]"></div>
+            
+            <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-center gap-5">
+                    <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-accent-500 text-3xl shadow-inner relative overflow-hidden">
+                        <i class="fa-solid fa-play relative z-10 ml-1"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">المكتبة المرئية</h2>
+                        <p class="text-sm text-primary-200 font-serif leading-relaxed max-w-xl">شاهد أحدث السلاسل المرئية، الخطب، واللقاءات التلفزيونية بجودة عالية ومصنفة لتسهيل الوصول.</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Action (e.g., Live Broadcast if available) -->
+                <a href="#" class="flex items-center gap-3 bg-red-600/20 border border-red-500/50 hover:bg-red-600/40 transition-colors text-white px-5 py-3 rounded-xl backdrop-blur-sm group">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                    <span class="text-sm font-bold">البث المباشر <i class="fa-solid fa-arrow-left text-[10px] mr-1 group-hover:-translate-x-1 transition-transform"></i></span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Content Controls (Filters) -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 mb-8 overflow-x-auto custom-scrollbar">
+            <div class="flex items-center gap-3 min-w-max">
+                <span class="text-xs text-slate-400 font-bold ml-2"><i class="fa-solid fa-filter"></i> تصفح المرئيات:</span>
+                
+                <button @click="activeTag = 'all'" :class="activeTag === 'all' ? 'bg-primary-900 text-white shadow-md' : 'bg-slate-50 text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-700'" class="px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-border-all"></i> الكل
+                </button>
+                        
+                <button @click="activeTag = 'series'" :class="activeTag === 'series' ? 'bg-primary-900 text-white shadow-md' : 'bg-slate-50 text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-700'" class="px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-accent-500"></i> السلاسل المرئية
+                </button>
+                        
+                <button @click="activeTag = 'clips'" :class="activeTag === 'clips' ? 'bg-primary-900 text-white shadow-md' : 'bg-slate-50 text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-700'" class="px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-film text-accent-500"></i> مقاطع دعوية
+                </button>
+                        
+                <button @click="activeTag = 'khotab'" :class="activeTag === 'khotab' ? 'bg-primary-900 text-white shadow-md' : 'bg-slate-50 text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-700'" class="px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-mosque text-accent-500"></i> خطب الجمعة
+                </button>
+
+                <button @click="activeTag = 'tv'" :class="activeTag === 'tv' ? 'bg-primary-900 text-white shadow-md' : 'bg-slate-50 text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-700'" class="px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-tv text-accent-500"></i> لقاءات تلفزيونية
+                </button>
+            </div>
+        </div>
+
+        <!-- VIDEOS GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            
+            <!-- Video Card 1 (Series) -->
+            <article x-show="activeTag === 'all' || activeTag === 'series'" x-transition class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:border-primary-300 transition-all duration-300 group flex flex-col">
+                <!-- Thumbnail Container (16:9) -->
+                <div class="relative w-full pt-[56.25%] bg-slate-900 overflow-hidden cursor-pointer" @click="openVideo('في ظلال آية: (إن إبراهيم كان أمة قانتاً لله حنيفاً)', 'سلسلة معالم قرآنية')">
+                    <!-- Abstract Placeholder Image for Thumbnail -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary-950 to-primary-800 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                        <i class="fa-solid fa-quran text-7xl text-white/10"></i>
+                    </div>
+                    
+                    <!-- Overlays -->
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                    
+                    <!-- Play Button Overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="w-14 h-14 bg-accent-600/90 text-white rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-white/20 shadow-[0_0_15px_rgba(234,179,8,0.5)] group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-play ml-1 text-xl"></i>
+                        </div>
+                    </div>
+
+                    <!-- Badges -->
+                    <span class="absolute bottom-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm">45:20</span>
+                    <span class="absolute top-3 right-3 bg-primary-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm backdrop-blur-sm">سلسلة مرئية</span>
+                </div>
+                
+                <!-- Card Info -->
+                <div class="p-4 flex flex-col flex-grow">
+                    <a href="#" class="text-[10px] text-slate-500 mb-1.5 hover:text-accent-600 transition-colors font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-layer-group text-accent-500"></i> معالم قرآنية
+                    </a>
+                    <h3 class="font-bold text-slate-800 text-sm leading-snug mb-3 group-hover:text-primary-700 transition-colors cursor-pointer" @click="openVideo('في ظلال آية: (إن إبراهيم كان أمة قانتاً لله حنيفاً)', 'سلسلة معالم قرآنية')">
+                        الحلقة الأولى: في ظلال آية (إن إبراهيم كان أمة قانتاً لله حنيفاً)
+                    </h3>
+                    
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400 font-serif">
+                        <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ١٢ رجب ١٤٤٥</span>
+                        <span><i class="fa-solid fa-eye ml-1 text-primary-400"></i> 12.5K</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Video Card 2 (Short Clip) -->
+            <article x-show="activeTag === 'all' || activeTag === 'clips'" x-transition class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:border-primary-300 transition-all duration-300 group flex flex-col">
+                <div class="relative w-full pt-[56.25%] bg-slate-900 overflow-hidden cursor-pointer" @click="openVideo('مقطع: الثبات في زمن الفتن', 'مقاطع دعوية')">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-slate-900 to-primary-900 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                        <i class="fa-solid fa-bolt text-7xl text-white/10"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="w-14 h-14 bg-accent-600/90 text-white rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-white/20 shadow-[0_0_15px_rgba(234,179,8,0.5)] group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-play ml-1 text-xl"></i>
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm">05:12</span>
+                    <span class="absolute top-3 right-3 bg-accent-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm backdrop-blur-sm">مقطع قصير</span>
+                </div>
+                
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="font-bold text-slate-800 text-sm leading-snug mb-3 mt-1 group-hover:text-primary-700 transition-colors cursor-pointer" @click="openVideo('مقطع: الثبات في زمن الفتن', 'مقاطع دعوية')">
+                        مقطع مؤثر: كيف يثبت المؤمن في زمن الفتن والمغريات؟
+                    </h3>
+                    
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400 font-serif">
+                        <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ٣ شعبان ١٤٤٥</span>
+                        <span><i class="fa-solid fa-eye ml-1 text-primary-400"></i> 45.2K</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Video Card 3 (TV Interview) -->
+            <article x-show="activeTag === 'all' || activeTag === 'tv'" x-transition class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:border-primary-300 transition-all duration-300 group flex flex-col">
+                <div class="relative w-full pt-[56.25%] bg-slate-900 overflow-hidden cursor-pointer" @click="openVideo('لقاء خاص: ذكريات الدعوة', 'لقاءات تلفزيونية')">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-900 to-indigo-900 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                        <i class="fa-solid fa-tv text-7xl text-white/10"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="w-14 h-14 bg-accent-600/90 text-white rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-white/20 shadow-[0_0_15px_rgba(234,179,8,0.5)] group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-play ml-1 text-xl"></i>
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm">52:30</span>
+                    <span class="absolute top-3 right-3 bg-indigo-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm backdrop-blur-sm">لقاء تلفزيوني</span>
+                </div>
+                
+                <div class="p-4 flex flex-col flex-grow">
+                    <a href="#" class="text-[10px] text-slate-500 mb-1.5 hover:text-accent-600 transition-colors font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-satellite-dish text-accent-500"></i> قناة المجد الفضائية
+                    </a>
+                    <h3 class="font-bold text-slate-800 text-sm leading-snug mb-3 group-hover:text-primary-700 transition-colors cursor-pointer" @click="openVideo('لقاء خاص: ذكريات الدعوة', 'لقاءات تلفزيونية')">
+                        لقاء خاص مع الشيخ محمد إسماعيل المقدم يتحدث فيه عن بدايات الصحوة
+                    </h3>
+                    
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400 font-serif">
+                        <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ١٥ رمضان ١٤٤٢</span>
+                        <span><i class="fa-solid fa-eye ml-1 text-primary-400"></i> 120K</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Video Card 4 (Khotab) -->
+            <article x-show="activeTag === 'all' || activeTag === 'khotab'" x-transition class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:border-primary-300 transition-all duration-300 group flex flex-col">
+                <div class="relative w-full pt-[56.25%] bg-slate-900 overflow-hidden cursor-pointer" @click="openVideo('خطبة الجمعة: الاستعداد لرمضان', 'خطب الجمعة')">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-emerald-900 to-primary-900 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                        <i class="fa-solid fa-mosque text-7xl text-white/10"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="w-14 h-14 bg-accent-600/90 text-white rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-white/20 shadow-[0_0_15px_rgba(234,179,8,0.5)] group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-play ml-1 text-xl"></i>
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm">38:15</span>
+                    <span class="absolute top-3 right-3 bg-emerald-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm backdrop-blur-sm">خطبة جمعة</span>
+                </div>
+                
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="font-bold text-slate-800 text-sm leading-snug mb-3 mt-1 group-hover:text-primary-700 transition-colors cursor-pointer" @click="openVideo('خطبة الجمعة: الاستعداد لرمضان', 'خطب الجمعة')">
+                        خطبة الجمعة: كيف نستعد لاستقبال شهر رمضان المبارك؟
+                    </h3>
+                    
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400 font-serif">
+                        <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ٢٥ شعبان ١٤٤٤</span>
+                        <span><i class="fa-solid fa-eye ml-1 text-primary-400"></i> 85K</span>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Video Card 5 (Series - Example 2) -->
+            <article x-show="activeTag === 'all' || activeTag === 'series'" x-transition class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:border-primary-300 transition-all duration-300 group flex flex-col">
+                <!-- Thumbnail Container (16:9) -->
+                <div class="relative w-full pt-[56.25%] bg-slate-900 overflow-hidden cursor-pointer" @click="openVideo('علامات الساعة الكبرى والصغرى', 'سلسلة أشراط الساعة')">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary-950 to-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                        <i class="fa-solid fa-hourglass-half text-7xl text-white/10"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="w-14 h-14 bg-accent-600/90 text-white rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-white/20 shadow-[0_0_15px_rgba(234,179,8,0.5)] group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-play ml-1 text-xl"></i>
+                        </div>
+                    </div>
+                    <span class="absolute bottom-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm">62:10</span>
+                    <span class="absolute top-3 right-3 bg-primary-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm backdrop-blur-sm">سلسلة مرئية</span>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <a href="#" class="text-[10px] text-slate-500 mb-1.5 hover:text-accent-600 transition-colors font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-layer-group text-accent-500"></i> أشراط الساعة
+                    </a>
+                    <h3 class="font-bold text-slate-800 text-sm leading-snug mb-3 group-hover:text-primary-700 transition-colors cursor-pointer" @click="openVideo('علامات الساعة الكبرى والصغرى', 'سلسلة أشراط الساعة')">
+                        الحلقة الأولى: مقدمة عن علامات الساعة الكبرى والصغرى
+                    </h3>
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400 font-serif">
+                        <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ١٠ محرم ١٤٤٢</span>
+                        <span><i class="fa-solid fa-eye ml-1 text-primary-400"></i> 210K</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Load More -->
+        <div class="flex justify-center mt-10">
+            <button class="bg-white border-2 border-primary-200 text-primary-800 hover:bg-primary-50 font-bold px-8 py-3 rounded-xl transition-colors flex items-center gap-2">
+                تحميل المزيد <i class="fa-solid fa-angle-down mt-1"></i>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- VIDEO MODAL (Cinematic Popup Player) -->
+    <div x-show="videoModal.isOpen" style="display: none;" class="fixed inset-0 z-[100] flex items-center justify-center px-4 md:px-12 py-12">
+        <!-- Backdrop -->
+        <div x-show="videoModal.isOpen" x-transition.opacity.duration.300ms class="absolute inset-0 bg-slate-950/95 backdrop-blur-sm" @click="closeVideo()"></div>
+        
+        <!-- Modal Content Container -->
+        <div x-show="videoModal.isOpen" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 transform scale-95 translate-y-4"
+             x-transition:enter-end="opacity-100 transform scale-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
+             x-transition:leave-end="opacity-0 transform scale-95 translate-y-4"
+             class="relative z-10 w-full max-w-5xl bg-slate-900 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] border border-slate-800 overflow-hidden flex flex-col">
+            
+            <!-- Close Button (Absolute Top Right inside Modal) -->
+            <button @click="closeVideo()" class="absolute top-4 left-4 w-10 h-10 bg-black/50 hover:bg-red-600 text-white rounded-full flex items-center justify-center z-50 transition-colors backdrop-blur-md">
+                <i class="fa-solid fa-times text-xl"></i>
+            </button>
+
+            <!-- Video Player Wrapper (16:9 Aspect Ratio Placeholder) -->
+            <div class="relative w-full pt-[56.25%] bg-black">
+                <!-- Fake Player UI for visual representation -->
+                <div class="absolute inset-0 flex flex-col justify-between group">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <!-- Simulated YouTube/Native Play Button -->
+                        <button class="w-20 h-20 rounded-full bg-accent-600 hover:bg-accent-500 text-white flex items-center justify-center transition-transform hover:scale-110 shadow-lg border-2 border-white/10">
+                            <i class="fa-solid fa-play ml-2 text-3xl"></i>
+                        </button>
+                    </div>
+                    <!-- Fake Video Controls Bar -->
+                    <div class="bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-4 text-white text-sm">
+                        <button><i class="fa-solid fa-pause"></i></button>
+                        <button><i class="fa-solid fa-volume-high"></i></button>
+                        <div class="flex-grow h-1.5 bg-white/20 rounded-full cursor-pointer relative">
+                            <div class="absolute h-full bg-accent-500 w-1/3 rounded-full"></div>
+                        </div>
+                        <span class="text-xs font-serif">12:30 / 45:20</span>
+                        <button><i class="fa-solid fa-cog"></i></button>
+                        <button><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Details -->
+            <div class="p-6 md:p-8 bg-slate-900 text-white border-t border-slate-800">
+                <span class="text-accent-500 text-xs font-bold mb-2 block" x-text="videoModal.category">اسم التصنيف أو السلسلة</span>
+                <h2 class="text-xl md:text-2xl font-bold mb-4" x-text="videoModal.title">عنوان الفيديو يظهر هنا</h2>
+                
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-800">
+                    <div class="flex items-center gap-6 text-sm text-slate-400 font-serif">
+                        <span><i class="fa-regular fa-calendar ml-1 text-accent-600"></i> نُشر في: ٢٠٢٤</span>
+                        <span><i class="fa-solid fa-eye ml-1 text-accent-600"></i> آلاف المشاهدات</span>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <button class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300 hover:bg-primary-600 hover:text-white transition-colors flex items-center justify-center" title="إضافة للمفضلة">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <button class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300 hover:bg-[#25D366] hover:text-white transition-colors flex items-center justify-center" title="مشاركة">
+                            <i class="fa-solid fa-share-nodes"></i>
+                        </button>
+                        <a href="#" class="bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-xl font-bold transition-colors text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح صفحة الدرس
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Alpine.js Logic -->
+    <script>
+        function videosPageData() {
+            return {
+                mobileMenuOpen: false,
+                activeTag: 'all', // 'all', 'series', 'clips', 'khotab', 'tv'
+                videoModal: {
+                    isOpen: false,
+                    title: '',
+                    category: ''
+                },
+                openVideo(title, category) {
+                    this.videoModal.title = title;
+                    this.videoModal.category = category;
+                    this.videoModal.isOpen = true;
+                },
+                closeVideo() {
+                    this.videoModal.isOpen = false;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مفهوم العبادة الشامل وأثره في حياة المسلم المعاصر - موقع الشيخ محمد إسماعيل المقدم</title>
+    
+    <!-- Google Fonts: Alexandria (UI/Headings) & Amiri (Content/Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Alpine.js for Interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration (Royal Blue & Islamic Gold Theme) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Alexandria', 'sans-serif'], 
+                        serif: ['Amiri', 'serif'],         
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8', // Royal Blue
+                            800: '#1e40af',
+                            900: '#1e3a8a', // Deep Sapphire
+                            950: '#172554',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef08a',
+                            200: '#fde047',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#b45309', // Islamic Gold
+                            800: '#92400e',
+                        },
+                        surface: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f8fafc; /* Lighter background for comfortable reading */
+            -webkit-font-smoothing: antialiased;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Print Styles */
+        @media print {
+            header, footer, aside, .no-print, .reading-progress { display: none !important; }
+            body { background: white; color: black; }
+            .article-content { font-size: 14pt !important; }
+            a { text-decoration: none !important; color: black !important; }
+        }
+
+        /* Quranic Verse Highlight Style */
+        .quran-verse {
+            color: #b45309; /* accent-700 */
+            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 2.2;
+            text-align: center;
+            display: block;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: rgba(254, 252, 232, 0.5); /* accent-50 with opacity */
+            border-right: 4px solid #b45309;
+            border-radius: 0.75rem;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800" 
+      x-data="{ 
+          mobileMenuOpen: false, 
+          scrollProgress: 0,
+          fontSize: 20,
+          increaseFont() { if(this.fontSize < 32) this.fontSize += 2 },
+          decreaseFont() { if(this.fontSize > 16) this.fontSize -= 2 },
+          updateScroll() {
+              let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+              let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+              this.scrollProgress = (winScroll / height) * 100;
+          }
+      }"
+      @scroll.window="updateScroll()">
+
+    <!-- Reading Progress Bar -->
+    <div class="fixed top-0 left-0 h-1 bg-accent-600 z-[60] reading-progress transition-all duration-150 ease-out" :style="'width: ' + scrollProgress + '%'"></div>
+
+    <!-- Top Bar -->
+    <div class="bg-primary-950 text-slate-200 py-1.5 text-xs sm:text-sm border-b border-accent-700/30 no-print">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <span class="text-accent-500"><i class="fa-regular fa-calendar-alt ml-1"></i> الإثنين، ١٢ محرم ١٤٤٨ هـ</span>
+            </div>
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <span class="border-r border-primary-800 h-4 mx-2"></span>
+                <a href="#" class="hover:text-accent-500 transition-colors font-medium">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100 no-print">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo & Branding -->
+                <div class="flex items-center gap-4">
+                    <button @click="mobileMenuOpen = true" class="lg:hidden text-slate-600 hover:text-primary-700 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-800 border border-primary-200 group-hover:border-accent-600 group-hover:text-accent-700 transition-colors">
+                            <i class="fa-solid fa-book-quran text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-primary-900 leading-tight group-hover:text-primary-700 transition-colors">موقع الشيخ</h1>
+                            <p class="text-xs text-accent-700 font-semibold hidden sm:block tracking-wider">محمد إسماعيل المقدم</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-8 font-semibold text-slate-600">
+                    <a href="#" class="hover:text-primary-700 transition-colors">الرئيسية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">الصوتيات والمرئيات</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">التفريغات</a>
+                    <a href="#" class="text-primary-800 border-b-2 border-accent-700 pb-1 transition-colors">المقالات والكتب</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">الفتاوى</a>
+                </nav>
+
+                <!-- Search -->
+                <div class="relative hidden md:block w-64">
+                    <input type="text" placeholder="ابحث في الموقع..." class="w-full bg-slate-50 text-sm rounded-full py-2 px-4 pl-10 border border-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+                    <i class="fa-solid fa-search absolute left-3 top-2.5 text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Drawer -->
+    <div x-show="mobileMenuOpen" style="display: none;" class="fixed inset-0 z-50 lg:hidden no-print">
+        <div class="absolute inset-0 bg-slate-900/80" @click="mobileMenuOpen = false" x-transition.opacity></div>
+        <div class="absolute top-0 right-0 bottom-0 w-72 bg-white shadow-2xl flex flex-col" x-transition.transform.duration.300ms>
+            <div class="p-4 flex justify-between items-center border-b border-slate-100 bg-primary-50">
+                <span class="font-bold text-primary-900">القائمة الرئيسية</span>
+                <button @click="mobileMenuOpen = false" class="text-slate-500 hover:text-accent-700 text-xl"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <nav class="p-4 flex-1 overflow-y-auto flex flex-col space-y-2 font-medium">
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-home w-6 text-center text-accent-700"></i> الرئيسية</a>
+                <a href="#" class="py-3 px-4 bg-primary-50 text-primary-800 rounded-xl"><i class="fa-solid fa-book-open w-6 text-center text-accent-700"></i> المقالات والكتب</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+        
+        <!-- Breadcrumbs -->
+        <div class="text-xs text-slate-400 font-medium mb-8 flex items-center gap-2 no-print">
+            <a href="#" class="hover:text-primary-700 transition-colors"><i class="fa-solid fa-home"></i> الرئيسية</a>
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+            <a href="#" class="hover:text-primary-700 transition-colors">المقالات والبحوث</a>
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+            <a href="#" class="hover:text-primary-700 transition-colors">تزكية ورقائق</a>
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+            <span class="text-primary-900 font-bold">مفهوم العبادة الشامل</span>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-10">
+            
+            <!-- MAIN ARTICLE AREA (Right) -->
+            <article class="w-full lg:w-3/4 flex flex-col gap-6 bg-white rounded-3xl p-6 md:p-12 shadow-sm border border-slate-100">
+                
+                <!-- Article Header -->
+                <header class="border-b border-slate-100 pb-8 mb-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-primary-50 text-primary-700 text-xs font-bold px-4 py-1.5 rounded-full border border-primary-100">تزكية ورقائق</span>
+                        <span class="text-xs text-slate-400 font-serif flex items-center gap-1"><i class="fa-regular fa-clock text-accent-600"></i> ٨ دقائق قراءة</span>
+                    </div>
+                    
+                    <h1 class="text-3xl md:text-5xl font-bold text-primary-900 leading-snug mb-6">مفهوم العبادة الشامل وأثره في حياة المسلم المعاصر</h1>
+                    
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <!-- Author Info -->
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-primary-700 text-xl">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] text-slate-400 font-bold block mb-0.5">بقلم الشيخ</span>
+                                <a href="#" class="font-bold text-slate-800 text-sm hover:text-primary-700 transition-colors">محمد إسماعيل المقدم</a>
+                            </div>
+                        </div>
+
+                        <!-- Date & Interactions -->
+                        <div class="flex items-center gap-4 text-sm text-slate-500 font-serif">
+                            <span><i class="fa-regular fa-calendar ml-1 text-primary-400"></i> ١٥ محرم ١٤٤٥</span>
+                            <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                            <span><i class="fa-regular fa-eye ml-1 text-primary-400"></i> 12.5K قراءة</span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Reading Tools (Font Size, Print, Share) -->
+                <div class="bg-slate-50 rounded-2xl p-4 flex flex-wrap justify-between items-center gap-4 border border-slate-100 no-print">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold text-slate-500 ml-2">حجم الخط:</span>
+                        <button @click="increaseFont()" class="w-10 h-10 rounded-xl bg-white text-slate-600 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 flex items-center justify-center border border-slate-200 transition-all shadow-sm" title="تكبير الخط"><i class="fa-solid fa-a text-lg"></i><i class="fa-solid fa-plus text-[10px] ml-1 mb-2"></i></button>
+                        <button @click="decreaseFont()" class="w-10 h-10 rounded-xl bg-white text-slate-600 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 flex items-center justify-center border border-slate-200 transition-all shadow-sm" title="تصغير الخط"><i class="fa-solid fa-a text-sm"></i><i class="fa-solid fa-minus text-[10px] ml-1 mb-2"></i></button>
+                        <button onclick="window.print()" class="w-10 h-10 rounded-xl bg-white text-slate-600 hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 flex items-center justify-center border border-slate-200 transition-all shadow-sm mr-2" title="طباعة المقال"><i class="fa-solid fa-print"></i></button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 ml-2">مشاركة:</span>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-white text-[#25D366] hover:bg-[#25D366] hover:text-white flex items-center justify-center border border-slate-200 transition-all shadow-sm"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-white text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white flex items-center justify-center border border-slate-200 transition-all shadow-sm"><i class="fa-brands fa-twitter text-lg"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-white text-[#0088cc] hover:bg-[#0088cc] hover:text-white flex items-center justify-center border border-slate-200 transition-all shadow-sm"><i class="fa-brands fa-telegram text-lg"></i></a>
+                    </div>
+                </div>
+
+                <!-- The Article Content -->
+                <div class="article-content font-serif text-slate-700 leading-loose transition-all duration-300" :style="'font-size: ' + fontSize + 'px'">
+                    
+                    <p class="mb-6">
+                        يظن البعض من أبناء الأمة أن العبادة محصورة في الشعائر التعبدية المحضة، كالصلاة والصيام والحج فحسب. والحق أن مفهوم العبادة في الإسلام أوسع من ذلك بكثير، فهو ينتظم حياة المسلم كلها، ويشمل كل ما يحبه الله ويرضاه من الأقوال والأعمال، الظاهرة والباطنة.
+                    </p>
+
+                    <p class="mb-6">
+                        إن هذا الفهم القاصر لمعنى العبادة أدى إلى انفصام نكد في حياة بعض المسلمين، فتجده في المسجد خاشعاً متبتلاً، فإذا خرج إلى سوقه أو عمله، تعامل بقوانين أخرى لا تمت لروح الإسلام بصلة! وهذا يتناقض تماماً مع الغاية الكبرى التي خُلقنا من أجلها.
+                    </p>
+
+                    <h2 class="font-sans font-bold text-primary-900 mt-10 mb-6 border-b-2 border-accent-100 pb-2 inline-block">حقيقة العبادة في التصور الإسلامي</h2>
+
+                    <p class="mb-6">
+                        لقد عرّف شيخ الإسلام ابن تيمية رحمه الله العبادة تعريفاً جامعاً مانعاً فقال: "العبادة هي اسم جامع لكل ما يحبه الله ويرضاه من الأقوال والأعمال الباطنة والظاهرة". فهذا التعريف ينقلنا من ضيق الشعائر إلى سعة الحياة.
+                    </p>
+
+                    <span class="quran-verse">
+                        ﴿ قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ * لَا شَرِيكَ لَهُ ۖ وَبِذَٰلِكَ أُمِرْتُ وَأَنَا أَوَّلُ الْمُسْلِمِينَ ﴾
+                    </span>
+
+                    <p class="mb-6">
+                        وتأمل في قوله تعالى: "وَمَحْيَايَ"، أي أن حياتي كلها بجميع تفاصيلها، نومي ويقظتي، عملي وفراغي، زواجي وتربيتي لأبنائي، بل وحتى ابتسامتي في وجه أخي، كلها يمكن أن تتحول إلى عبادة وقربى إلى الله عز وجل، إذا توفر فيها شرطان أساسيان:
+                    </p>
+
+                    <ul class="list-disc list-inside space-y-4 mb-8 text-primary-900 marker:text-accent-600 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                        <li><strong class="text-primary-800 font-sans">إخلاص النية لله:</strong> أن يقصد المسلم بعمله وجه الله والدار الآخرة، والتقوي على طاعته.</li>
+                        <li><strong class="text-primary-800 font-sans">موافقة الشرع (المتابعة):</strong> ألا يكون العمل في ذاته محرماً، فلا يتقرب إلى الله بمعصية.</li>
+                    </ul>
+
+                    <h2 class="font-sans font-bold text-primary-900 mt-10 mb-6 border-b-2 border-accent-100 pb-2 inline-block">تحويل العادات إلى عبادات</h2>
+
+                    <p class="mb-6">
+                        من فضل الله الواسع على هذه الأمة، أن المسلم يمكنه تحويل عاداته اليومية المباحة إلى عبادات يؤجر عليها بالنية الصالحة. فالطالب في دراسته إذا نوى نفع المسلمين ورفع الجهل عن نفسه فهو في عبادة. والعامل في مصنعه إذا نوى كسب الحلال وإعفاف نفسه وأهله فهو في عبادة.
+                    </p>
+                    
+                    <div class="bg-primary-50 border-r-4 border-primary-500 p-6 rounded-l-2xl my-8 font-sans text-primary-800 font-medium text-base leading-relaxed">
+                        <i class="fa-solid fa-quote-right text-3xl text-primary-200 mb-2 block"></i>
+                        قال معاذ بن جبل رضي الله عنه: "أما أنا فأنام وأقوم، فأحتسب نومتي كما أحتسب قومتي". أي أنه يرجو الثواب في نومه الذي يتقوى به على قيام الليل، كما يرجو الثواب في قيامه وصبه.
+                    </div>
+
+                    <p class="mb-6">
+                        إن استشعار هذا المعنى الشامل يملأ حياة المسلم بالرضا والسكينة، ويجعله دائم الصلة بالله عز وجل، لا تنقطع عبادته بخروجه من المسجد، بل مسجده هو الأرض كلها كما قال الحبيب ﷺ: «وجعلت لي الأرض مسجداً وطهوراً».
+                    </p>
+
+                    <p class="mb-6">
+                        نسأل الله أن يفقهنا في ديننا، وأن يرزقنا الإخلاص في القول والعمل، وأن يجعل حركاتنا وسكناتنا كلها خالصة لوجهه الكريم. والحمد لله رب العالمين.
+                    </p>
+                </div>
+
+                <!-- Article Tags -->
+                <div class="mt-8 pt-8 border-t border-slate-100 no-print flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 ml-2"><i class="fa-solid fa-tags"></i> الكلمات الدلالية:</span>
+                        <a href="#" class="bg-slate-50 hover:bg-primary-50 hover:text-primary-700 text-slate-600 border border-slate-100 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">مفهوم العبادة</a>
+                        <a href="#" class="bg-slate-50 hover:bg-primary-50 hover:text-primary-700 text-slate-600 border border-slate-100 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">الإخلاص</a>
+                        <a href="#" class="bg-slate-50 hover:bg-primary-50 hover:text-primary-700 text-slate-600 border border-slate-100 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">تزكية النفس</a>
+                        <a href="#" class="bg-slate-50 hover:bg-primary-50 hover:text-primary-700 text-slate-600 border border-slate-100 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">مقالات دعوية</a>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- SIDEBAR (Left visually) -->
+            <aside class="w-full lg:w-1/4 flex flex-col gap-8 no-print">
+                
+                <!-- Related Articles Box -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden sticky top-24">
+                    <div class="px-6 py-5 border-b border-slate-100 flex items-center gap-3">
+                        <i class="fa-solid fa-layer-group text-accent-500 text-lg"></i>
+                        <h3 class="font-bold text-primary-900">مقالات ذات صلة</h3>
+                    </div>
+                    
+                    <div class="flex flex-col">
+                        <!-- Related 1 -->
+                        <a href="#" class="p-5 border-b border-slate-50 hover:bg-slate-50 transition-colors group">
+                            <h4 class="font-bold text-sm text-slate-800 leading-snug group-hover:text-primary-700 transition-colors mb-2">كيف نستعد لاستقبال شهر رمضان المبارك؟</h4>
+                            <span class="text-[11px] text-slate-400 font-serif flex items-center gap-1"><i class="fa-regular fa-calendar text-accent-500"></i> ٢٠ شعبان ١٤٤٤</span>
+                        </a>
+                        
+                        <!-- Related 2 -->
+                        <a href="#" class="p-5 border-b border-slate-50 hover:bg-slate-50 transition-colors group">
+                            <h4 class="font-bold text-sm text-slate-800 leading-snug group-hover:text-primary-700 transition-colors mb-2">أهمية طلب العلم الشرعي في زمن الفتن</h4>
+                            <span class="text-[11px] text-slate-400 font-serif flex items-center gap-1"><i class="fa-regular fa-calendar text-accent-500"></i> ٥ ذو القعدة ١٤٤٤</span>
+                        </a>
+
+                        <!-- Related 3 -->
+                        <a href="#" class="p-5 hover:bg-slate-50 transition-colors group">
+                            <h4 class="font-bold text-sm text-slate-800 leading-snug group-hover:text-primary-700 transition-colors mb-2">آفات اللسان: الغيبة والنميمة وعلاجهما</h4>
+                            <span class="text-[11px] text-slate-400 font-serif flex items-center gap-1"><i class="fa-regular fa-calendar text-accent-500"></i> ١٢ ربيع الأول ١٤٤٥</span>
+                        </a>
+                    </div>
+                    
+                    <a href="#" class="block bg-primary-50 text-center py-3 text-xs font-bold text-primary-700 hover:bg-primary-100 transition-colors border-t border-primary-100">عرض المزيد في هذا التصنيف</a>
+                </div>
+
+                <!-- Newsletter Subscription Mini -->
+                <div class="bg-gradient-to-br from-primary-900 to-slate-900 rounded-3xl p-6 text-center shadow-md border-t-4 border-accent-600 relative overflow-hidden">
+                    <div class="absolute -right-8 -top-8 w-24 h-24 bg-accent-500/20 rounded-full blur-xl"></div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 text-accent-400 border border-white/20">
+                            <i class="fa-solid fa-envelope-open-text text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">النشرة البريدية</h4>
+                        <p class="text-xs text-primary-200 font-serif mb-4">اشترك ليصلك جديد مقالات وبحوث الشيخ مباشرة على بريدك</p>
+                        <input type="email" placeholder="أدخل بريدك الإلكتروني" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm text-white placeholder-white/50 focus:outline-none focus:border-accent-500 mb-3 text-center transition-colors backdrop-blur-sm">
+                        <button class="w-full bg-accent-600 hover:bg-accent-500 text-white font-bold py-2.5 rounded-xl transition-colors text-sm shadow-md">اشتراك الآن</button>
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 border-t-4 border-primary-600 pt-12 pb-6 mt-12 font-serif no-print">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center gap-3 mb-4 text-white">
+                    <i class="fa-solid fa-book-quran text-2xl text-accent-500"></i>
+                    <h2 class="text-xl font-bold font-sans">موقع الشيخ محمد إسماعيل</h2>
+                </div>
+                <p class="text-sm leading-relaxed text-slate-400">موقع دعوي علمي يهدف إلى نشر العلم النافع المستمد من كتاب الله وسنة رسوله بفهم سلف الأمة.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4 font-sans">روابط سريعة</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-accent-400 transition flex items-center gap-2"><i class="fa-solid fa-angle-left text-xs"></i> من هو الشيخ؟</a></li>
+                    <li><a href="#" class="hover:text-accent-400 transition flex items-center gap-2"><i class="fa-solid fa-angle-left text-xs"></i> السلاسل العلمية</a></li>
+                    <li><a href="#" class="hover:text-accent-400 transition flex items-center gap-2"><i class="fa-solid fa-angle-left text-xs"></i> تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4 font-sans">تواصل معنا</h3>
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-slate-800 pt-6 text-center text-sm font-sans flex flex-col sm:flex-row justify-between items-center container mx-auto px-4 gap-4">
+            <p>جميع الحقوق محفوظة © 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>

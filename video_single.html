@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>في ظلال آية (إن إبراهيم كان أمة) - موقع الشيخ محمد إسماعيل المقدم</title>
+    
+    <!-- Google Fonts: Alexandria (UI/Headings) & Amiri (Content/Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Alpine.js for Interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration (Royal Blue & Islamic Gold Theme) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Alexandria', 'sans-serif'], 
+                        serif: ['Amiri', 'serif'],         
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8', 
+                            800: '#1e40af',
+                            900: '#1e3a8a', // Deep Sapphire
+                            950: '#172554',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef08a',
+                            200: '#fde047',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#b45309', // Muted Islamic Gold
+                            800: '#92400e',
+                        },
+                        surface: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f1f5f9;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; } /* Darker scrollbar for cinematic feel */
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        .custom-scroll::-webkit-scrollbar-track { background: #f8fafc; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; }
+        
+        /* Aspect Ratio utility for video */
+        .aspect-video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        .aspect-video-container iframe, 
+        .aspect-video-container video,
+        .aspect-video-container div.player-mockup {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800" x-data="{ mobileMenuOpen: false, activeTab: 'desc' }">
+
+    <!-- Top Bar -->
+    <div class="bg-primary-950 text-slate-200 py-1.5 text-xs sm:text-sm border-b border-accent-700/30">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <span class="text-accent-500"><i class="fa-regular fa-calendar-alt ml-1"></i> الإثنين، ١٢ محرم ١٤٤٨ هـ</span>
+            </div>
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <span class="border-r border-primary-800 h-4 mx-2"></span>
+                <a href="#" class="hover:text-accent-500 transition-colors font-medium">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <button @click="mobileMenuOpen = true" class="lg:hidden text-slate-600 hover:text-primary-700 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-800 border border-primary-200 group-hover:border-accent-600 group-hover:text-accent-700 transition-colors">
+                            <i class="fa-solid fa-book-quran text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-primary-900 leading-tight group-hover:text-primary-700 transition-colors">موقع الشيخ</h1>
+                            <p class="text-xs text-accent-700 font-semibold hidden sm:block tracking-wider">محمد إسماعيل المقدم</p>
+                        </div>
+                    </a>
+                </div>
+
+                <nav class="hidden lg:flex items-center gap-8 font-semibold text-slate-600">
+                    <a href="#" class="hover:text-primary-700 transition-colors">الرئيسية</a>
+                    <a href="#" class="text-primary-800 border-b-2 border-accent-700 pb-1 transition-colors">المكتبة المرئية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">المكتبة الصوتية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">التفريغات</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">المقالات والكتب</a>
+                </nav>
+
+                <div class="relative hidden md:block w-64">
+                    <input type="text" placeholder="ابحث في المرئيات..." class="w-full bg-slate-50 text-sm rounded-full py-2 px-4 pl-10 border border-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+                    <i class="fa-solid fa-search absolute left-3 top-2.5 text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CINEMATIC VIDEO SECTION (Dark Background) -->
+    <div class="bg-slate-950 border-b border-slate-800 pb-8 pt-6">
+        <div class="container mx-auto px-4 max-w-7xl">
+            
+            <!-- Breadcrumbs (Dark Mode) -->
+            <div class="text-[11px] text-slate-400 font-medium mb-4 flex items-center gap-2">
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-solid fa-home"></i> الرئيسية</a>
+                <i class="fa-solid fa-chevron-left text-[8px] opacity-50"></i>
+                <a href="#" class="hover:text-accent-500 transition-colors">المكتبة المرئية</a>
+                <i class="fa-solid fa-chevron-left text-[8px] opacity-50"></i>
+                <a href="#" class="hover:text-accent-500 transition-colors">سلسلة معالم قرآنية</a>
+                <i class="fa-solid fa-chevron-left text-[8px] opacity-50"></i>
+                <span class="text-white font-bold">الحلقة الأولى: في ظلال آية</span>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Video Player Area (70% width on large screens) -->
+                <div class="w-full lg:w-[70%]">
+                    <!-- 16:9 Aspect Ratio Container -->
+                    <div class="aspect-video-container bg-black rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-slate-800 relative group">
+                        
+                        <!-- MOCKUP VIDEO PLAYER -->
+                        <div class="player-mockup flex flex-col justify-between">
+                            <!-- Fake Video Background/Thumbnail -->
+                            <div class="absolute inset-0 bg-gradient-to-tr from-slate-900 to-primary-900 flex items-center justify-center">
+                                <i class="fa-solid fa-quran text-9xl text-white/5"></i>
+                            </div>
+                            
+                            <!-- Large Play Button Center -->
+                            <div class="absolute inset-0 flex items-center justify-center z-10 cursor-pointer">
+                                <div class="w-20 h-20 bg-accent-600/90 hover:bg-accent-500 text-white rounded-full flex items-center justify-center backdrop-blur-sm shadow-[0_0_30px_rgba(234,179,8,0.4)] transition-transform hover:scale-110 border-2 border-white/20">
+                                    <i class="fa-solid fa-play ml-2 text-3xl"></i>
+                                </div>
+                            </div>
+
+                            <!-- Top Gradient (Fake title inside player) -->
+                            <div class="bg-gradient-to-b from-black/80 to-transparent p-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h2 class="text-white font-bold text-sm truncate">الحلقة الأولى: في ظلال آية (إن إبراهيم كان أمة قانتاً لله حنيفاً)</h2>
+                            </div>
+
+                            <!-- Bottom Fake Controls -->
+                            <div class="bg-gradient-to-t from-black/90 to-transparent p-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end">
+                                <div class="w-full h-1 bg-white/20 rounded-full mb-3 cursor-pointer relative">
+                                    <div class="absolute top-0 right-0 h-full w-1/4 bg-accent-500 rounded-full"></div>
+                                    <div class="absolute top-1/2 right-1/4 w-3 h-3 bg-white rounded-full transform translate-x-1/2 -translate-y-1/2 shadow-md"></div>
+                                </div>
+                                <div class="flex justify-between items-center text-white text-sm">
+                                    <div class="flex items-center gap-4">
+                                        <button class="hover:text-accent-500"><i class="fa-solid fa-pause"></i></button>
+                                        <button class="hover:text-accent-500"><i class="fa-solid fa-volume-high"></i></button>
+                                        <span class="text-xs font-serif">12:30 / 45:20</span>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <button class="hover:text-accent-500"><i class="fa-solid fa-closed-captioning"></i></button>
+                                        <button class="hover:text-accent-500"><i class="fa-solid fa-cog"></i></button>
+                                        <button class="hover:text-accent-500"><i class="fa-solid fa-expand"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Meta Info (Under Player) -->
+                    <div class="mt-5">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="bg-accent-600/20 text-accent-400 border border-accent-600/30 text-[10px] font-bold px-2 py-1 rounded">سلسلة معالم قرآنية</span>
+                            <span class="bg-slate-800 text-slate-300 text-[10px] font-bold px-2 py-1 rounded">#تفسير</span>
+                        </div>
+                        
+                        <h1 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">الحلقة الأولى: في ظلال آية (إن إبراهيم كان أمة قانتاً لله حنيفاً)</h1>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-5 border-b border-slate-800">
+                            <!-- Stats -->
+                            <div class="flex items-center gap-6 text-sm text-slate-400 font-serif">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar text-accent-600"></i> ١٢ رجب ١٤٤٥</span>
+                                <span class="flex items-center gap-1.5"><i class="fa-solid fa-eye text-accent-600"></i> 12,540 مشاهدة</span>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-2">
+                                <button class="h-10 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold transition-colors flex items-center gap-2 border border-slate-700">
+                                    <i class="fa-regular fa-heart"></i> حفظ
+                                </button>
+                                <button class="h-10 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold transition-colors flex items-center gap-2 border border-slate-700" title="تحميل صوتي فقط">
+                                    <i class="fa-solid fa-headphones"></i> تحميل MP3
+                                </button>
+                                <button class="h-10 px-4 rounded-xl bg-accent-600 hover:bg-accent-500 text-white text-sm font-bold transition-colors flex items-center gap-2 border border-accent-500 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
+                                    <i class="fa-solid fa-share-nodes"></i> مشاركة
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Playlist / Up Next (30% width on large screens) -->
+                <div class="w-full lg:w-[30%] flex flex-col h-[500px] lg:h-auto">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl flex flex-col h-full overflow-hidden">
+                        <!-- Playlist Header -->
+                        <div class="p-4 bg-slate-800/50 border-b border-slate-800 flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold text-white text-sm">سلسلة معالم قرآنية</h3>
+                                <p class="text-[10px] text-slate-400 mt-1 font-serif">الشيخ محمد إسماعيل المقدم - 12 حلقة</p>
+                            </div>
+                            <button class="w-8 h-8 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Playlist Items -->
+                        <div class="flex-1 overflow-y-auto custom-scroll p-2 space-y-1">
+                            
+                            <!-- Current Playing Video -->
+                            <a href="#" class="flex gap-3 p-2 rounded-xl bg-primary-900/40 border border-primary-700/50 relative overflow-hidden group">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-accent-500"></div>
+                                <div class="relative w-28 aspect-video bg-slate-800 rounded-lg overflow-hidden flex-shrink-0">
+                                    <div class="absolute inset-0 bg-primary-900 flex items-center justify-center opacity-80"><i class="fa-solid fa-quran text-2xl text-white/20"></i></div>
+                                    <span class="absolute bottom-1 right-1 bg-black/80 text-white text-[9px] px-1 rounded">45:20</span>
+                                    <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+                                        <div class="w-6 h-6 rounded-full bg-accent-600 flex items-center justify-center"><i class="fa-solid fa-play ml-0.5 text-[10px] text-white"></i></div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h4 class="text-xs font-bold text-white leading-snug line-clamp-2">الحلقة الأولى: في ظلال آية (إن إبراهيم كان أمة...)</h4>
+                                    <span class="text-[10px] text-accent-400 mt-1">▶ قيد التشغيل</span>
+                                </div>
+                            </a>
+
+                            <!-- Video 2 -->
+                            <a href="#" class="flex gap-3 p-2 rounded-xl hover:bg-slate-800 border border-transparent transition-colors group">
+                                <div class="relative w-28 aspect-video bg-slate-800 rounded-lg overflow-hidden flex-shrink-0">
+                                    <div class="absolute inset-0 bg-slate-700 flex items-center justify-center"><i class="fa-solid fa-quran text-2xl text-white/10"></i></div>
+                                    <span class="absolute bottom-1 right-1 bg-black/80 text-white text-[9px] px-1 rounded">52:10</span>
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity">
+                                        <i class="fa-solid fa-play text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h4 class="text-xs font-bold text-slate-300 group-hover:text-white transition-colors leading-snug line-clamp-2">الحلقة الثانية: معالم ربانية في سورة الكهف</h4>
+                                    <span class="text-[10px] text-slate-500 mt-1">الشيخ محمد إسماعيل</span>
+                                </div>
+                            </a>
+
+                            <!-- Video 3 -->
+                            <a href="#" class="flex gap-3 p-2 rounded-xl hover:bg-slate-800 border border-transparent transition-colors group">
+                                <div class="relative w-28 aspect-video bg-slate-800 rounded-lg overflow-hidden flex-shrink-0">
+                                    <div class="absolute inset-0 bg-slate-700 flex items-center justify-center"><i class="fa-solid fa-quran text-2xl text-white/10"></i></div>
+                                    <span class="absolute bottom-1 right-1 bg-black/80 text-white text-[9px] px-1 rounded">38:45</span>
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity">
+                                        <i class="fa-solid fa-play text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h4 class="text-xs font-bold text-slate-300 group-hover:text-white transition-colors leading-snug line-clamp-2">الحلقة الثالثة: تأملات في قصة موسى والخضر</h4>
+                                    <span class="text-[10px] text-slate-500 mt-1">الشيخ محمد إسماعيل</span>
+                                </div>
+                            </a>
+
+                             <!-- Video 4 -->
+                             <a href="#" class="flex gap-3 p-2 rounded-xl hover:bg-slate-800 border border-transparent transition-colors group">
+                                <div class="relative w-28 aspect-video bg-slate-800 rounded-lg overflow-hidden flex-shrink-0">
+                                    <div class="absolute inset-0 bg-slate-700 flex items-center justify-center"><i class="fa-solid fa-quran text-2xl text-white/10"></i></div>
+                                    <span class="absolute bottom-1 right-1 bg-black/80 text-white text-[9px] px-1 rounded">41:20</span>
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity">
+                                        <i class="fa-solid fa-play text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h4 class="text-xs font-bold text-slate-300 group-hover:text-white transition-colors leading-snug line-clamp-2">الحلقة الرابعة: وقفات مع سورة النور وأحكامها</h4>
+                                    <span class="text-[10px] text-slate-500 mt-1">الشيخ محمد إسماعيل</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT (Description & Transcript) -->
+    <div class="container mx-auto px-4 max-w-7xl py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Content Area -->
+            <div class="w-full lg:w-[70%]">
+                
+                <!-- Custom Tabs -->
+                <div class="flex gap-6 border-b border-slate-200 mb-6">
+                    <button @click="activeTab = 'desc'" 
+                            class="pb-3 text-sm font-bold transition-all border-b-2 relative"
+                            :class="activeTab === 'desc' ? 'border-primary-700 text-primary-900' : 'border-transparent text-slate-500 hover:text-slate-800'">
+                        <i class="fa-solid fa-info-circle ml-1"></i> وصف المحاضرة
+                    </button>
+                    <button @click="activeTab = 'transcript'" 
+                            class="pb-3 text-sm font-bold transition-all border-b-2 relative"
+                            :class="activeTab === 'transcript' ? 'border-primary-700 text-primary-900' : 'border-transparent text-slate-500 hover:text-slate-800'">
+                        <i class="fa-solid fa-file-lines ml-1"></i> التفريغ النصي
+                    </button>
+                </div>
+
+                <!-- Tab Content: Description -->
+                <div x-show="activeTab === 'desc'" x-transition.opacity.duration.300ms class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 md:p-8">
+                    
+                    <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+                        <div class="w-14 h-14 rounded-full bg-primary-50 border border-primary-100 flex items-center justify-center text-primary-700 text-xl">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 font-bold">المُحاضر</span>
+                            <h3 class="font-bold text-primary-900 text-base">الشيخ محمد إسماعيل المقدم</h3>
+                        </div>
+                        <button class="mr-auto bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-2 rounded-lg transition-colors">متابعة الشيخ</button>
+                    </div>
+
+                    <div class="prose prose-slate prose-lg max-w-none font-serif text-slate-700 leading-loose">
+                        <p>
+                            في هذا اللقاء المبارك، يطوف بنا الشيخ حفظه الله في رياض القرآن الكريم، متوقفاً عند قوله تعالى في سورة النحل: <strong>﴿إِنَّ إِبْرَاهِيمَ كَانَ أُمَّةً قَانِتًا لِّلَّهِ حَنِيفًا وَلَمْ يَكُ مِنَ الْمُشْرِكِينَ﴾</strong>.
+                        </p>
+                        <p>
+                            يستخرج الشيخ المعاني العظيمة من هذه الآية، موضحاً كيف يمكن للفرد الواحد أن يكون بمثابة "أمة" كاملة إذا صدق في إيمانه، واستقام على منهج الله، وتجرد من كل شرك خفي أو جلي.
+                        </p>
+                        
+                        <h4 class="font-sans font-bold text-primary-800 mt-6">عناصر المحاضرة:</h4>
+                        <ul class="list-disc list-inside marker:text-accent-600 bg-slate-50 p-5 rounded-xl border border-slate-100 mt-3 space-y-2">
+                            <li>معنى كلمة (أمة) في السياق القرآني واللغوي.</li>
+                            <li>صفات الخليل إبراهيم عليه السلام وكيف نقتدي بها.</li>
+                            <li>مفهوم القنوت لله عز وجل والانقياد التام لأمره.</li>
+                            <li>الحنيفية السمحة: الميل عن الشرك إلى التوحيد الخالص.</li>
+                            <li>كيف يبني المسلم المعاصر شخصيته ليكون مؤثراً في مجتمعه.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Transcript -->
+                <div x-show="activeTab === 'transcript'" style="display: none;" x-transition.opacity.duration.300ms class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 md:p-8">
+                    <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                        <h3 class="font-bold text-primary-900 flex items-center gap-2">
+                            <i class="fa-solid fa-file-text text-accent-600"></i> نص المحاضرة المفرغ
+                        </h3>
+                        <div class="flex gap-2">
+                            <button class="w-8 h-8 rounded bg-slate-100 text-slate-600 hover:bg-primary-50 hover:text-primary-700 flex items-center justify-center transition-colors" title="تكبير الخط"><i class="fa-solid fa-plus text-xs"></i></button>
+                            <button class="w-8 h-8 rounded bg-slate-100 text-slate-600 hover:bg-primary-50 hover:text-primary-700 flex items-center justify-center transition-colors" title="تصغير الخط"><i class="fa-solid fa-minus text-xs"></i></button>
+                            <button class="w-8 h-8 rounded bg-slate-100 text-slate-600 hover:bg-primary-50 hover:text-primary-700 flex items-center justify-center transition-colors" title="طباعة"><i class="fa-solid fa-print text-xs"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="prose prose-slate prose-lg max-w-none font-serif text-slate-800 leading-loose">
+                        <p class="text-center font-bold text-primary-800 mb-6">بسم الله الرحمن الرحيم</p>
+                        <p>
+                            إن الحمد لله، نحمده ونستعينه ونستغفره، ونعوذ بالله من شرور أنفسنا ومن سيئات أعمالنا، من يهده الله فلا مضل له، ومن يضلل فلا هادي له. وأشهد أن لا إله إلا الله وحده لا شريك له، وأشهد أن محمداً عبده ورسوله.
+                        </p>
+                        <p>
+                            أما بعد؛ فمرحباً بكم إخوتي في الله في هذا اللقاء المتجدد مع كتاب الله عز وجل، ومعالم قرآنية تضيء لنا الدرب في زمان اشتدت فيه الفتن وتلاطمت فيه الأمواج.
+                        </p>
+                        <p>
+                            وقفتنا اليوم مع آية عظيمة من سورة النحل، يقول الحق تبارك وتعالى فيها يمدح خليله إبراهيم: ﴿إِنَّ إِبْرَاهِيمَ كَانَ أُمَّةً قَانِتًا لِّلَّهِ حَنِيفًا وَلَمْ يَكُ مِنَ الْمُشْرِكِينَ﴾. هذه الآية ترسم لنا لوحة متكاملة لشخصية المؤمن القدوة...
+                        </p>
+                        <div class="bg-primary-50/50 p-4 rounded-xl border border-primary-100 text-center text-sm text-primary-700 font-sans font-medium mt-8">
+                            <i class="fa-solid fa-lock text-accent-500 mb-2 text-xl block"></i>
+                            هذا مقتطف من التفريغ. يمكنك تحميل الملف كاملاً ككتاب إلكتروني (PDF).
+                            <button class="mt-3 bg-primary-700 hover:bg-primary-800 text-white px-4 py-2 rounded-lg transition-colors inline-block text-xs font-bold shadow-sm">تحميل التفريغ كاملاً <i class="fa-solid fa-download ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Secondary Sidebar -->
+            <div class="w-full lg:w-[30%] space-y-6">
+                
+                <!-- Downloads Widget -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="bg-primary-50 px-4 py-3 border-b border-primary-100">
+                        <h3 class="font-bold text-primary-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-arrow-down text-accent-600"></i> ملفات التحميل
+                        </h3>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 border border-slate-100 transition-colors group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-red-50 text-red-500 flex items-center justify-center text-lg group-hover:bg-red-500 group-hover:text-white transition-colors"><i class="fa-regular fa-file-pdf"></i></div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-700">التفريغ النصي</h4>
+                                    <span class="text-[10px] text-slate-400 font-serif">1.2 MB - PDF</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-download text-slate-300 group-hover:text-primary-600 transition-colors"></i>
+                        </a>
+                        
+                        <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 border border-slate-100 transition-colors group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center text-lg group-hover:bg-primary-600 group-hover:text-white transition-colors"><i class="fa-solid fa-file-audio"></i></div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-700">نسخة صوتية (جودة عالية)</h4>
+                                    <span class="text-[10px] text-slate-400 font-serif">45 MB - MP3</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-download text-slate-300 group-hover:text-primary-600 transition-colors"></i>
+                        </a>
+
+                        <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 border border-slate-100 transition-colors group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center text-lg group-hover:bg-slate-600 group-hover:text-white transition-colors"><i class="fa-solid fa-file-video"></i></div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-700">نسخة مرئية (متوسطة)</h4>
+                                    <span class="text-[10px] text-slate-400 font-serif">120 MB - MP4</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-download text-slate-300 group-hover:text-primary-600 transition-colors"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tags Widget -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
+                    <h3 class="font-bold text-slate-800 text-sm mb-4">الكلمات الدلالية</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#" class="bg-slate-50 border border-slate-100 hover:border-primary-300 hover:text-primary-700 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">سورة النحل</a>
+                        <a href="#" class="bg-slate-50 border border-slate-100 hover:border-primary-300 hover:text-primary-700 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">إبراهيم عليه السلام</a>
+                        <a href="#" class="bg-slate-50 border border-slate-100 hover:border-primary-300 hover:text-primary-700 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">التوحيد</a>
+                        <a href="#" class="bg-slate-50 border border-slate-100 hover:border-primary-300 hover:text-primary-700 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">تدبر</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

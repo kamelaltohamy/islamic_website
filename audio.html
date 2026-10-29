@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المكتبة الصوتية - موقع الشيخ محمد إسماعيل المقدم</title>
+    
+    <!-- Google Fonts: Alexandria (UI/Headings) & Amiri (Content/Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Alpine.js for Interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration (Royal Blue & Islamic Gold Theme) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Alexandria', 'sans-serif'], 
+                        serif: ['Amiri', 'serif'],         
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8', // Royal Blue
+                            800: '#1e40af',
+                            900: '#1e3a8a', // Deep Sapphire / Navy
+                            950: '#172554',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef08a',
+                            200: '#fde047',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#b45309', // Islamic Gold / Brass
+                            800: '#92400e',
+                        },
+                        surface: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f1f5f9;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 pb-24" x-data="audioPageData()">
+
+    <!-- Top Bar -->
+    <div class="bg-primary-950 text-slate-200 py-1.5 text-xs sm:text-sm border-b border-accent-700/30">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <span class="text-accent-500"><i class="fa-regular fa-calendar-alt ml-1"></i> الإثنين، ١٢ محرم ١٤٤٨ هـ</span>
+            </div>
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-accent-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <span class="border-r border-primary-800 h-4 mx-2"></span>
+                <a href="#" class="hover:text-accent-500 transition-colors font-medium">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo & Branding -->
+                <div class="flex items-center gap-4">
+                    <button @click="mobileMenuOpen = true" class="lg:hidden text-slate-600 hover:text-primary-700 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-800 border border-primary-200 group-hover:border-accent-600 group-hover:text-accent-700 transition-colors">
+                            <i class="fa-solid fa-book-quran text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-primary-900 leading-tight group-hover:text-primary-700 transition-colors">موقع الشيخ</h1>
+                            <p class="text-xs text-accent-700 font-semibold hidden sm:block tracking-wider">محمد إسماعيل المقدم</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-8 font-semibold text-slate-600">
+                    <a href="#" class="hover:text-primary-700 transition-colors">الرئيسية</a>
+                    <a href="#" class="text-primary-800 border-b-2 border-accent-700 pb-1 transition-colors">المكتبة الصوتية</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">التفريغات</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">المقالات والكتب</a>
+                    <a href="#" class="hover:text-primary-700 transition-colors">الفتاوى</a>
+                </nav>
+
+                <!-- Search -->
+                <div class="relative hidden md:block w-64">
+                    <input type="text" placeholder="ابحث في الموقع..." class="w-full bg-slate-50 text-sm rounded-full py-2 px-4 pl-10 border border-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+                    <i class="fa-solid fa-search absolute left-3 top-2.5 text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Drawer -->
+    <div x-show="mobileMenuOpen" style="display: none;" class="fixed inset-0 z-50 lg:hidden">
+        <div class="absolute inset-0 bg-slate-900/80" @click="mobileMenuOpen = false" x-transition.opacity></div>
+        <div class="absolute top-0 right-0 bottom-0 w-72 bg-white shadow-2xl flex flex-col" x-transition.transform.duration.300ms>
+            <div class="p-4 flex justify-between items-center border-b border-slate-100 bg-primary-50">
+                <span class="font-bold text-primary-900">القائمة الرئيسية</span>
+                <button @click="mobileMenuOpen = false" class="text-slate-500 hover:text-accent-700 text-xl"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <nav class="p-4 flex-1 overflow-y-auto flex flex-col space-y-2 font-medium">
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-home w-6 text-center text-accent-700"></i> الرئيسية</a>
+                <a href="#" class="py-3 px-4 bg-primary-50 text-primary-800 rounded-xl"><i class="fa-solid fa-microphone w-6 text-center text-accent-700"></i> المكتبة الصوتية</a>
+                <a href="#" class="py-3 px-4 text-slate-600 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-book w-6 text-center text-accent-700"></i> المقالات والكتب</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        
+        <!-- Breadcrumbs -->
+        <div class="text-xs text-slate-400 font-medium mb-6 flex items-center gap-2">
+            <a href="#" class="hover:text-primary-700 transition-colors"><i class="fa-solid fa-home"></i> الرئيسية</a>
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+            <span class="text-primary-900 font-bold">المكتبة الصوتية</span>
+        </div>
+
+        <!-- Page Hero Section -->
+        <div class="bg-gradient-to-br from-primary-900 to-primary-950 rounded-3xl p-8 mb-8 relative overflow-hidden shadow-sm border-t-4 border-accent-700">
+            <!-- Islamic Abstract Pattern Overlay -->
+            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+            
+            <div class="relative z-10 flex items-center gap-5">
+                <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-accent-500 text-3xl shadow-inner">
+                    <i class="fa-solid fa-headphones-simple"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">المكتبة الصوتية</h2>
+                    <p class="text-sm text-primary-200 font-serif leading-relaxed max-w-xl">استمع إلى مئات المحاضرات، السلاسل العلمية، والدروس المنهجية الميسرة في مختلف فروع العلوم الشرعية.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Controls (Tabs & Tags) -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 mb-8">
+            
+            <!-- Tabs (Series vs Singles) -->
+            <div class="flex gap-8 border-b border-slate-100 mb-6">
+                <button @click="activeTab = 'series'" class="pb-4 text-sm md:text-base font-bold transition-all relative flex items-center gap-2" :class="activeTab === 'series' ? 'text-primary-900' : 'text-slate-400 hover:text-slate-600'">
+                    <i class="fa-solid fa-layer-group text-lg" :class="activeTab === 'series' ? 'text-accent-600' : ''"></i> السلاسل العلمية
+                    <div x-show="activeTab === 'series'" x-transition class="absolute bottom-0 right-0 w-full h-1 bg-accent-600 rounded-t-full"></div>
+                </button>
+                <button @click="activeTab = 'singles'" class="pb-4 text-sm md:text-base font-bold transition-all relative flex items-center gap-2" :class="activeTab === 'singles' ? 'text-primary-900' : 'text-slate-400 hover:text-slate-600'">
+                    <i class="fa-solid fa-microphone-lines text-lg" :class="activeTab === 'singles' ? 'text-accent-600' : ''"></i> الصوتيات المنفردة
+                    <div x-show="activeTab === 'singles'" x-transition class="absolute bottom-0 right-0 w-full h-1 bg-accent-600 rounded-t-full"></div>
+                </button>
+            </div>
+
+            <!-- Tags Filter -->
+            <div class="flex flex-wrap items-center gap-3">
+                <span class="text-xs text-slate-400 font-bold ml-2"><i class="fa-solid fa-filter"></i> تصنيف حسب:</span>
+                
+                <button @click="activeTag = 'all'" :class="activeTag === 'all' ? 'bg-primary-50 text-primary-800 border-primary-200 shadow-sm' : 'bg-white text-slate-500 border-slate-200 hover:border-primary-300 hover:bg-slate-50'" class="px-4 py-1.5 rounded-full text-xs font-bold border transition-colors">الكل</button>
+                        
+                <button @click="activeTag = 'aqeda'" :class="activeTag === 'aqeda' ? 'bg-primary-50 text-primary-800 border-primary-200 shadow-sm' : 'bg-white text-slate-500 border-slate-200 hover:border-primary-300 hover:bg-slate-50'" class="px-4 py-1.5 rounded-full text-xs font-bold border transition-colors">عقيدة</button>
+                        
+                <button @click="activeTag = 'fiqh'" :class="activeTag === 'fiqh' ? 'bg-primary-50 text-primary-800 border-primary-200 shadow-sm' : 'bg-white text-slate-500 border-slate-200 hover:border-primary-300 hover:bg-slate-50'" class="px-4 py-1.5 rounded-full text-xs font-bold border transition-colors">فقه</button>
+                        
+                <button @click="activeTag = 'tafsir'" :class="activeTag === 'tafsir' ? 'bg-primary-50 text-primary-800 border-primary-200 shadow-sm' : 'bg-white text-slate-500 border-slate-200 hover:border-primary-300 hover:bg-slate-50'" class="px-4 py-1.5 rounded-full text-xs font-bold border transition-colors">تفسير</button>
+                        
+                <button @click="activeTag = 'hadith'" :class="activeTag === 'hadith' ? 'bg-primary-50 text-primary-800 border-primary-200 shadow-sm' : 'bg-white text-slate-500 border-slate-200 hover:border-primary-300 hover:bg-slate-50'" class="px-4 py-1.5 rounded-full text-xs font-bold border transition-colors">حديث</button>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 1: AUDIO SERIES (السلاسل العلمية) -->
+        <!-- ========================================== -->
+        <div x-show="activeTab === 'series'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            
+            <!-- Series Card: Hadith -->
+            <div x-show="activeTag === 'all' || activeTag === 'hadith'" class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md hover:border-primary-200 transition-all group">
+                <div class="h-36 bg-gradient-to-br from-primary-800 to-primary-950 relative p-5 flex flex-col justify-between overflow-hidden">
+                    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <span class="bg-white/10 backdrop-blur-md text-accent-400 text-[10px] font-bold px-2.5 py-1 rounded-md border border-white/10"><i class="fa-solid fa-tag ml-1"></i> حديث</span>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/5 group-hover:scale-110 transition-transform"><i class="fa-solid fa-folder-open text-lg"></i></div>
+                    </div>
+                    <h3 class="relative z-10 font-bold text-white text-base leading-tight mt-2">سلسلة شرح صحيح البخارى</h3>
+                </div>
+                <div class="p-4 flex justify-between items-center bg-white">
+                    <span class="text-xs text-slate-500 font-serif"><i class="fa-solid fa-list-ol text-accent-600 ml-1"></i> 85 درس صوتي</span>
+                    <button class="text-xs font-bold text-primary-700 hover:text-white transition-colors bg-primary-50 hover:bg-primary-700 px-3 py-1.5 rounded-lg border border-primary-100 hover:border-primary-700">تصفح <i class="fa-solid fa-chevron-left mr-1 text-[10px]"></i></button>
+                </div>
+            </div>
+
+            <!-- Series Card: Fiqh -->
+            <div x-show="activeTag === 'all' || activeTag === 'fiqh'" class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md hover:border-primary-200 transition-all group">
+                <div class="h-36 bg-gradient-to-br from-primary-800 to-primary-950 relative p-5 flex flex-col justify-between overflow-hidden">
+                    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <span class="bg-white/10 backdrop-blur-md text-accent-400 text-[10px] font-bold px-2.5 py-1 rounded-md border border-white/10"><i class="fa-solid fa-tag ml-1"></i> فقه</span>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/5 group-hover:scale-110 transition-transform"><i class="fa-solid fa-folder-open text-lg"></i></div>
+                    </div>
+                    <h3 class="relative z-10 font-bold text-white text-base leading-tight mt-2">شرح كتاب عمدة الأحكام</h3>
+                </div>
+                <div class="p-4 flex justify-between items-center bg-white">
+                    <span class="text-xs text-slate-500 font-serif"><i class="fa-solid fa-list-ol text-accent-600 ml-1"></i> 42 درس صوتي</span>
+                    <button class="text-xs font-bold text-primary-700 hover:text-white transition-colors bg-primary-50 hover:bg-primary-700 px-3 py-1.5 rounded-lg border border-primary-100 hover:border-primary-700">تصفح <i class="fa-solid fa-chevron-left mr-1 text-[10px]"></i></button>
+                </div>
+            </div>
+
+            <!-- Series Card: Tafsir -->
+            <div x-show="activeTag === 'all' || activeTag === 'tafsir'" class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md hover:border-primary-200 transition-all group">
+                <div class="h-36 bg-gradient-to-br from-primary-800 to-primary-950 relative p-5 flex flex-col justify-between overflow-hidden">
+                    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <span class="bg-white/10 backdrop-blur-md text-accent-400 text-[10px] font-bold px-2.5 py-1 rounded-md border border-white/10"><i class="fa-solid fa-tag ml-1"></i> تفسير</span>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/5 group-hover:scale-110 transition-transform"><i class="fa-solid fa-folder-open text-lg"></i></div>
+                    </div>
+                    <h3 class="relative z-10 font-bold text-white text-base leading-tight mt-2">تفسير سورة الأعراف</h3>
+                </div>
+                <div class="p-4 flex justify-between items-center bg-white">
+                    <span class="text-xs text-slate-500 font-serif"><i class="fa-solid fa-list-ol text-accent-600 ml-1"></i> 15 درس صوتي</span>
+                    <button class="text-xs font-bold text-primary-700 hover:text-white transition-colors bg-primary-50 hover:bg-primary-700 px-3 py-1.5 rounded-lg border border-primary-100 hover:border-primary-700">تصفح <i class="fa-solid fa-chevron-left mr-1 text-[10px]"></i></button>
+                </div>
+            </div>
+            
+            <!-- Series Card: Aqeda -->
+            <div x-show="activeTag === 'all' || activeTag === 'aqeda'" class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md hover:border-primary-200 transition-all group">
+                <div class="h-36 bg-gradient-to-br from-primary-800 to-primary-950 relative p-5 flex flex-col justify-between overflow-hidden">
+                    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+Cgk8cGF0aCBkPSJNMjAgMEwyMCA0ME0wIDIwTDQwIDIwIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <span class="bg-white/10 backdrop-blur-md text-accent-400 text-[10px] font-bold px-2.5 py-1 rounded-md border border-white/10"><i class="fa-solid fa-tag ml-1"></i> عقيدة</span>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/5 group-hover:scale-110 transition-transform"><i class="fa-solid fa-folder-open text-lg"></i></div>
+                    </div>
+                    <h3 class="relative z-10 font-bold text-white text-base leading-tight mt-2">شرح العقيدة الطحاوية</h3>
+                </div>
+                <div class="p-4 flex justify-between items-center bg-white">
+                    <span class="text-xs text-slate-500 font-serif"><i class="fa-solid fa-list-ol text-accent-600 ml-1"></i> 60 درس صوتي</span>
+                    <button class="text-xs font-bold text-primary-700 hover:text-white transition-colors bg-primary-50 hover:bg-primary-700 px-3 py-1.5 rounded-lg border border-primary-100 hover:border-primary-700">تصفح <i class="fa-solid fa-chevron-left mr-1 text-[10px]"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: SINGLE AUDIOS (الصوتيات المنفردة) -->
+        <!-- ========================================== -->
+        <div x-show="activeTab === 'singles'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" style="display: none;" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <!-- Single Track: Fiqh -->
+            <div x-show="activeTag === 'all' || activeTag === 'fiqh'" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md hover:border-primary-200 transition-all group">
+                <button @click="playTrack('أحكام ومقاصد زكاة الفطر', 'مواضيع فقهية متفرقة')" class="w-14 h-14 flex-shrink-0 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center group-hover:bg-accent-600 group-hover:text-white group-hover:border-accent-600 transition-colors border border-primary-100">
+                    <i class="fa-solid fa-play text-lg ml-1"></i>
+                </button>
+                <div class="flex-grow overflow-hidden">
+                    <h3 class="font-bold text-sm text-primary-900 mb-1.5 truncate group-hover:text-primary-700 transition-colors">أحكام ومقاصد زكاة الفطر</h3>
+                    <div class="flex items-center gap-3 text-[11px] text-slate-400 font-serif">
+                        <span class="bg-slate-50 px-2 py-0.5 rounded text-slate-500 font-sans font-bold"><i class="fa-solid fa-tag text-accent-600 ml-1"></i> فقه</span>
+                        <span><i class="fa-regular fa-clock text-accent-600 ml-1"></i> 45:20</span>
+                        <span class="hidden sm:inline"><i class="fa-regular fa-calendar text-accent-600 ml-1"></i> ١٢ رمضان ١٤٤٥</span>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 border-r border-slate-100 pr-4">
+                    <button class="text-slate-400 hover:text-primary-700 transition-colors" title="تحميل الملف"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- Single Track: Aqeda -->
+            <div x-show="activeTag === 'all' || activeTag === 'aqeda'" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md hover:border-primary-200 transition-all group">
+                <button @click="playTrack('مفهوم الولاء والبراء في الإسلام', 'محاضرات العقيدة')" class="w-14 h-14 flex-shrink-0 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center group-hover:bg-accent-600 group-hover:text-white group-hover:border-accent-600 transition-colors border border-primary-100">
+                    <i class="fa-solid fa-play text-lg ml-1"></i>
+                </button>
+                <div class="flex-grow overflow-hidden">
+                    <h3 class="font-bold text-sm text-primary-900 mb-1.5 truncate group-hover:text-primary-700 transition-colors">مفهوم الولاء والبراء في الإسلام</h3>
+                    <div class="flex items-center gap-3 text-[11px] text-slate-400 font-serif">
+                        <span class="bg-slate-50 px-2 py-0.5 rounded text-slate-500 font-sans font-bold"><i class="fa-solid fa-tag text-accent-600 ml-1"></i> عقيدة</span>
+                        <span><i class="fa-regular fa-clock text-accent-600 ml-1"></i> 52:10</span>
+                        <span class="hidden sm:inline"><i class="fa-regular fa-calendar text-accent-600 ml-1"></i> ٥ محرم ١٤٤٥</span>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 border-r border-slate-100 pr-4">
+                    <button class="text-slate-400 hover:text-primary-700 transition-colors" title="تحميل الملف"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- Single Track: Hadith -->
+            <div x-show="activeTag === 'all' || activeTag === 'hadith'" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md hover:border-primary-200 transition-all group">
+                <button @click="playTrack('شرح حديث: إنما الأعمال بالنيات', 'الأربعون النووية')" class="w-14 h-14 flex-shrink-0 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center group-hover:bg-accent-600 group-hover:text-white group-hover:border-accent-600 transition-colors border border-primary-100">
+                    <i class="fa-solid fa-play text-lg ml-1"></i>
+                </button>
+                <div class="flex-grow overflow-hidden">
+                    <h3 class="font-bold text-sm text-primary-900 mb-1.5 truncate group-hover:text-primary-700 transition-colors">شرح حديث: إنما الأعمال بالنيات</h3>
+                    <div class="flex items-center gap-3 text-[11px] text-slate-400 font-serif">
+                        <span class="bg-slate-50 px-2 py-0.5 rounded text-slate-500 font-sans font-bold"><i class="fa-solid fa-tag text-accent-600 ml-1"></i> حديث</span>
+                        <span><i class="fa-regular fa-clock text-accent-600 ml-1"></i> 38:15</span>
+                        <span class="hidden sm:inline"><i class="fa-regular fa-calendar text-accent-600 ml-1"></i> ٢٠ صفر ١٤٤٥</span>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 border-r border-slate-100 pr-4">
+                    <button class="text-slate-400 hover:text-primary-700 transition-colors" title="تحميل الملف"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+
+             <!-- Single Track: Tafsir -->
+             <div x-show="activeTag === 'all' || activeTag === 'tafsir'" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md hover:border-primary-200 transition-all group">
+                <button @click="playTrack('تأملات ووقفات مع سورة النور', 'مقتطفات قرآنية')" class="w-14 h-14 flex-shrink-0 rounded-full bg-primary-50 text-primary-700 flex items-center justify-center group-hover:bg-accent-600 group-hover:text-white group-hover:border-accent-600 transition-colors border border-primary-100">
+                    <i class="fa-solid fa-play text-lg ml-1"></i>
+                </button>
+                <div class="flex-grow overflow-hidden">
+                    <h3 class="font-bold text-sm text-primary-900 mb-1.5 truncate group-hover:text-primary-700 transition-colors">تأملات ووقفات مع سورة النور</h3>
+                    <div class="flex items-center gap-3 text-[11px] text-slate-400 font-serif">
+                        <span class="bg-slate-50 px-2 py-0.5 rounded text-slate-500 font-sans font-bold"><i class="fa-solid fa-tag text-accent-600 ml-1"></i> تفسير</span>
+                        <span><i class="fa-regular fa-clock text-accent-600 ml-1"></i> 59:00</span>
+                        <span class="hidden sm:inline"><i class="fa-regular fa-calendar text-accent-600 ml-1"></i> ١ ربيع الأول ١٤٤٥</span>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 border-r border-slate-100 pr-4">
+                    <button class="text-slate-400 hover:text-primary-700 transition-colors" title="تحميل الملف"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Sticky Mini Audio Player (Appears when play is clicked) -->
+    <div x-show="player.isOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="translate-y-0" x-transition:leave-end="translate-y-full" style="display: none;" class="fixed bottom-0 left-0 right-0 z-50 bg-primary-900 border-t-2 border-accent-600 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] text-white">
+        <div class="container mx-auto px-4 py-3 flex flex-col md:flex-row items-center gap-4">
+            
+            <!-- Track Info -->
+            <div class="flex items-center gap-4 w-full md:w-1/3">
+                <div class="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shadow-inner flex-shrink-0">
+                    <i class="fa-solid fa-headphones text-accent-400 text-lg"></i>
+                </div>
+                <div class="overflow-hidden">
+                    <h4 class="font-bold text-sm truncate" x-text="player.title">اسم المقطع</h4>
+                    <p class="text-[11px] text-primary-200 font-serif truncate mt-0.5" x-text="player.series">اسم السلسلة</p>
+                </div>
+            </div>
+
+            <!-- Controls & Timeline -->
+            <div class="flex-grow w-full flex flex-col items-center gap-2">
+                <div class="flex items-center gap-6">
+                    <button class="text-slate-400 hover:text-accent-400 transition-colors"><i class="fa-solid fa-backward-step"></i></button>
+                    <button @click="player.isPlaying = !player.isPlaying" class="w-10 h-10 rounded-full bg-accent-600 text-white flex items-center justify-center hover:bg-accent-500 transition-colors shadow-md">
+                        <i class="fa-solid" :class="player.isPlaying ? 'fa-pause' : 'fa-play ml-1'"></i>
+                    </button>
+                    <button class="text-slate-400 hover:text-accent-400 transition-colors"><i class="fa-solid fa-forward-step"></i></button>
+                </div>
+                <!-- Fake Progress Bar -->
+                <div class="w-full max-w-md flex items-center gap-3 text-[10px] text-slate-400 font-serif">
+                    <span>12:45</span>
+                    <div class="flex-grow h-1.5 bg-white/10 rounded-full overflow-hidden cursor-pointer relative">
+                        <div class="absolute h-full bg-accent-500 w-1/3 rounded-full"></div>
+                    </div>
+                    <span>45:20</span>
+                </div>
+            </div>
+
+            <!-- Actions & Close -->
+            <div class="w-full md:w-1/3 flex justify-end items-center gap-5 text-slate-300">
+                <button class="hover:text-white transition-colors"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="hover:text-white transition-colors" title="تحميل"><i class="fa-solid fa-download"></i></button>
+                <span class="h-4 w-px bg-white/20"></span>
+                <button @click="player.isOpen = false; player.isPlaying = false" class="hover:text-red-400 transition-colors" title="إغلاق المشغل"><i class="fa-solid fa-times text-xl"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alpine.js Logic -->
+    <script>
+        function audioPageData() {
+            return {
+                mobileMenuOpen: false,
+                activeTab: 'series', // 'series' | 'singles'
+                activeTag: 'all',    // 'all' | 'aqeda' | 'fiqh' | 'tafsir' | 'hadith'
+                player: {
+                    isOpen: false,
+                    isPlaying: false,
+                    title: '',
+                    series: ''
+                },
+                playTrack(title, series) {
+                    this.player.title = title;
+                    this.player.series = series;
+                    this.player.isOpen = true;
+                    this.player.isPlaying = true;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
